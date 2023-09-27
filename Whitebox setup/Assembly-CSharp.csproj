@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\RobotManagerEditor.cs" />
     <Compile Include="Assets\Scripts\RobotManager.cs" />
+    <Compile Include="Assets\Scripts\playerMovement.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
