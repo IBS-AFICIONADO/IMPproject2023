@@ -144,14 +144,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73859d7ae8085844a919c9b0425c9af5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fov: 2.8
-  alertStage: 2
-  fovAngle: 92
-  alertLevel: 507
-  maximumAlert: 300
+  radius: 10
+  fovAngle: 108
+  alertSpeed: 1
+  forgetSpeed: 1
+  alertStage: 0
+  alertLevel: 0
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 64
+  obstructionMask:
+    serializedVersion: 2
+    m_Bits: 128
   alertUI: {fileID: 9159716224536290783}
   alertSlider: {fileID: 9159716224513945400}
   alertSliderFill: {fileID: 9159716224709701245}
+  turnRate: 0
+  speed: 0
+  playerInFOV: 0
+  maxAlertEdit: 100
+  targetRef: {fileID: 0}
 --- !u!1 &2264507486706238791
 GameObject:
   m_ObjectHideFlags: 0

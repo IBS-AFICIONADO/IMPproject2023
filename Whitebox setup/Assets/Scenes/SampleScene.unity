@@ -154,13 +154,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1326085209165253175, guid: e34dcc98d9bcac24285f223c55d1fb4a, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1326085209165253192, guid: e34dcc98d9bcac24285f223c55d1fb4a, type: 3}
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1326085209165253192, guid: e34dcc98d9bcac24285f223c55d1fb4a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.99
+      value: -10.3
       objectReference: {fileID: 0}
     - target: {fileID: 1326085209165253192, guid: e34dcc98d9bcac24285f223c55d1fb4a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -168,7 +172,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1326085209165253192, guid: e34dcc98d9bcac24285f223c55d1fb4a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 13.86
+      value: 12.66
       objectReference: {fileID: 0}
     - target: {fileID: 1326085209165253192, guid: e34dcc98d9bcac24285f223c55d1fb4a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -305,6 +309,14 @@ PrefabInstance:
     - target: {fileID: 9159716224742739357, guid: e3aa0f027150c4a40a63c215d1f23ee6, type: 3}
       propertyPath: alertStage
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9159716224742739357, guid: e3aa0f027150c4a40a63c215d1f23ee6, type: 3}
+      propertyPath: alertSlider
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9159716224742739357, guid: e3aa0f027150c4a40a63c215d1f23ee6, type: 3}
+      propertyPath: alertSliderFill
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3aa0f027150c4a40a63c215d1f23ee6, type: 3}
@@ -469,6 +481,14 @@ PrefabInstance:
       propertyPath: fov
       value: 5.54
       objectReference: {fileID: 0}
+    - target: {fileID: 9159716224742739357, guid: e3aa0f027150c4a40a63c215d1f23ee6, type: 3}
+      propertyPath: alertSlider
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9159716224742739357, guid: e3aa0f027150c4a40a63c215d1f23ee6, type: 3}
+      propertyPath: alertSliderFill
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3aa0f027150c4a40a63c215d1f23ee6, type: 3}
 --- !u!1001 &1268302907
@@ -539,12 +559,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9159716224742739357, guid: e3aa0f027150c4a40a63c215d1f23ee6, type: 3}
-      propertyPath: fov
-      value: 6.464883
+      propertyPath: fovAngle
+      value: 110
       objectReference: {fileID: 0}
     - target: {fileID: 9159716224742739357, guid: e3aa0f027150c4a40a63c215d1f23ee6, type: 3}
-      propertyPath: fovAngle
-      value: 81
+      propertyPath: alertSlider
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9159716224742739357, guid: e3aa0f027150c4a40a63c215d1f23ee6, type: 3}
+      propertyPath: alertSliderFill
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3aa0f027150c4a40a63c215d1f23ee6, type: 3}
