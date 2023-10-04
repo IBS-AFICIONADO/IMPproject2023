@@ -13,7 +13,6 @@ public class RobotManagerEditor : Editor
         //drawing circle with radius of viewing radius
         Handles.color = Color.white;
         Handles.DrawWireArc(fov.transform.position, Vector3.up, Vector3.forward, 360, fov.radius);
-
         //setting color to alertness level and drawing vision cone
         Color c = Color.green;
         if (fov.alertStage == AlertStage.Intrigued)

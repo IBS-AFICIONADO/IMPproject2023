@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.AI;
+
 
 public enum AlertStage
 {
@@ -21,7 +22,7 @@ public class RobotManager : MonoBehaviour
     const float maxAlert = 100f;
     public float alertSpeed = 1;
     public float forgetSpeed = 1;
-    
+
 
     public AlertStage alertStage;
     [Range(0, maxAlert)] public float alertLevel;
@@ -29,38 +30,34 @@ public class RobotManager : MonoBehaviour
     //parametrs for raycasting, detecting objects
     public LayerMask targetMask;
     public LayerMask obstructionMask;
-    
-  
 
-    //parameters for changing UI above head enemies
-    //public GameObject alertUI;
-   // public Slider alertSlider;
-   // public Image alertSliderFill;
-
-    //parameters enemy movement
-    public float turnRate;
-    public float speed;
-
-    //parameters needed in the editor but not important fror changing in editor
+    //parameters needed in the editor but not important for changing in editor
     [HideInInspector]
     public bool playerInFOV;
     [HideInInspector]
     public float maxAlertEdit = maxAlert;
     [HideInInspector]
     public GameObject targetRef;
+
+    //moving AI bits
+    NavMeshAgent agent;
+    private Vector3 player;
+    
+    //on start all enemies are set to peaceful 
     private void Awake()
     {
         alertStage = AlertStage.Peaceful;
         alertLevel = 0;
-     //   alertSlider.value = 0;
+        agent = GetComponent<NavMeshAgent>();
         targetRef = GameObject.FindGameObjectWithTag("Player");
     }
 
 
     private void Update()
     {
+        //by using a coroutine that runs every .5 seconds load is lower 
         StartCoroutine(FOVRoutine());
- 
+
     }
 
     private IEnumerator FOVRoutine()
@@ -72,13 +69,13 @@ public class RobotManager : MonoBehaviour
             yield return wait;
             FOVCheck();
             UpdateAlertstate(playerInFOV);
-         
-           RobotMovement(targetRef);
-
+            moveTo();
         }
     }
+
     private void FOVCheck()
     {
+        //check if there are any other colliders in a sphere with view radius on the targetlayer specific layer prevents from scanning all layers every iteration
         Collider[] targetsInFOV = Physics.OverlapSphere(transform.position, radius, targetMask);
         if (targetsInFOV.Length != 0)
         {
@@ -86,27 +83,36 @@ public class RobotManager : MonoBehaviour
             {
                 if (c.CompareTag("Player"))
                 {
+                    //calculate direction between enemy and player
                     Vector3 directionToTarget = (c.transform.position - transform.position).normalized;
 
+                    //angle returns the smallest angle between two vectors sp fovAngle has to be halved
                     if (Vector3.Angle(transform.forward, directionToTarget) < fovAngle / 2)
                     {
                         float distanceToTarget = Vector3.Distance(transform.position, c.transform.position);
+                        //draws a raycast on the layer of obstacles if it returns from enemy to player if it hits nothing robot can see the player
                         if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
                         {
                             playerInFOV = true;
+                            player = c.transform.position;
                         }
                         else
                             playerInFOV = false;
                     }
                     else
                         playerInFOV = false;
-                }   
+                }
+
+               // if(c.CompareTag("Distraction"))
+               // {
+
+               // }
             }
         }
         else if (playerInFOV)
             playerInFOV = false;
     }
-  
+
     private void UpdateAlertstate(bool playerinFOV)
     {
         switch (alertStage)
@@ -120,7 +126,7 @@ public class RobotManager : MonoBehaviour
             case AlertStage.Intrigued:
                 if (playerinFOV)
                 {
-                    alertLevel+= alertSpeed * Time.deltaTime;
+                    alertLevel += alertSpeed * Time.deltaTime;
                     if (alertLevel >= maxAlert)
                     {
                         alertStage = AlertStage.Alerted;
@@ -128,7 +134,7 @@ public class RobotManager : MonoBehaviour
                 }
                 else
                 {
-                    alertLevel-= forgetSpeed * Time.deltaTime;
+                    alertLevel -= forgetSpeed * Time.deltaTime;
                     if (alertLevel <= 0)
                     {
                         alertStage = AlertStage.Peaceful;
@@ -147,16 +153,15 @@ public class RobotManager : MonoBehaviour
 
         }
     }
-    private void RobotMovement(GameObject target)
+    
+    private void moveTo()
     {
         if (alertStage == AlertStage.Alerted)
         {
-            var toPlayer = target.transform.position - transform.position;
-            transform.rotation = Quaternion.RotateTowards(transform.rotation,
-                Quaternion.LookRotation(toPlayer),
-                Time.deltaTime * turnRate);
-           // transform.Translate(transform.forward * speed * Time.deltaTime);
+            agent.isStopped = false;
+            agent.SetDestination(player);
         }
+        else if(alertStage == AlertStage.Peaceful)
+            agent.isStopped = true;
     }
 }
-
