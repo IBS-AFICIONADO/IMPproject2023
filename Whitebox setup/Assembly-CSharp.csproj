@@ -58,9 +58,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\playerMovement.cs" />
-    <Compile Include="Assets\Scripts\RobotManagerEditor.cs" />
     <Compile Include="Assets\Scripts\RobotManager.cs" />
-    <Compile Include="Assets\playerCam.cs" />
+    <Compile Include="Assets\Scripts\playerCam.cs" />
+    <Compile Include="Assets\Scripts\playerController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -687,9 +687,17 @@
       <Project>{A2F94A0A-B6EB-B957-970C-43D9E670E0D1}</Project>
       <Name>Unity.VisualScripting.Flow.Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="Cinemachine.csproj">
+      <Project>{8B58A21B-1AA7-619B-2B1C-7B2CE26CDF23}</Project>
+      <Name>Cinemachine</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.VSCode.Editor.csproj">
       <Project>{A2656C29-6EB3-8737-18E4-82DC3A126272}</Project>
       <Name>Unity.VSCode.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="com.unity.cinemachine.editor.csproj">
+      <Project>{0EC46B30-7E9D-41B3-F8A5-E8EA7D6605B8}</Project>
+      <Name>com.unity.cinemachine.editor</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.VisualScripting.Shared.Editor.csproj">
       <Project>{F62F527A-0EBA-6789-05D5-834C41EDD95C}</Project>
@@ -774,14 +782,6 @@
     <ProjectReference Include="Unity.EditorCoroutines.Editor.csproj">
       <Project>{EC603795-AA23-ECD0-861F-06D14FECFCDF}</Project>
       <Name>Unity.EditorCoroutines.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="com.unity.cinemachine.editor.csproj">
-      <Project>{0EC46B30-7E9D-41B3-F8A5-E8EA7D6605B8}</Project>
-      <Name>com.unity.cinemachine.editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Cinemachine.csproj">
-      <Project>{8B58A21B-1AA7-619B-2B1C-7B2CE26CDF23}</Project>
-      <Name>Cinemachine</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

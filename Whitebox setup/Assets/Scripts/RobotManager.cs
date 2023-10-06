@@ -94,7 +94,6 @@ public class RobotManager : MonoBehaviour
                         if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
                         {
                             playerInFOV = true;
-                            player = c.transform.position;
                         }
                         else
                             playerInFOV = false;
@@ -119,6 +118,7 @@ public class RobotManager : MonoBehaviour
         {
             case AlertStage.Peaceful:
                 alertLevel = 0;
+                agent.isStopped = true;
                 if (playerinFOV)
                     alertStage = AlertStage.Intrigued;
                 break;
@@ -143,6 +143,10 @@ public class RobotManager : MonoBehaviour
                 break;
 
             case AlertStage.Alerted:
+
+                agent.isStopped = false;
+                agent.SetDestination(player);
+
                 if (!playerinFOV)
                 {
                     alertStage = AlertStage.Intrigued;
@@ -158,7 +162,12 @@ public class RobotManager : MonoBehaviour
     {
         if (alertStage == AlertStage.Alerted)
         {
+            player = targetRef.transform.position;
             agent.isStopped = false;
+            agent.SetDestination(player);
+        } else if (alertStage == AlertStage.Intrigued && !agent.isStopped)
+        {
+            player = targetRef.transform.position;
             agent.SetDestination(player);
         }
         else if(alertStage == AlertStage.Peaceful)

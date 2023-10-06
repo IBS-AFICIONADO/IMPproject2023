@@ -58,9 +58,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\playerMovement.cs" />
-    <Compile Include="Assets\Scripts\RobotManagerEditor.cs" />
     <Compile Include="Assets\Scripts\RobotManager.cs" />
-    <Compile Include="Assets\playerCam.cs" />
+    <Compile Include="Assets\Scripts\playerCam.cs" />
+    <Compile Include="Assets\Scripts\playerController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -635,6 +635,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Cinemachine.Player.csproj">
+      <Project>{B1A7AB67-2230-36E6-82D1-A02AA8D430B8}</Project>
+      <Name>Cinemachine.Player</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.Timeline.Player.csproj">
       <Project>{1FF0AD13-C43C-2B39-0B09-0E9FCE261373}</Project>
       <Name>Unity.Timeline.Player</Name>
@@ -658,10 +662,6 @@
     <ProjectReference Include="Unity.VisualScripting.Core.Player.csproj">
       <Project>{52FE4903-EE4E-2D15-ADF9-E72AE05B3050}</Project>
       <Name>Unity.VisualScripting.Core.Player</Name>
-    </ProjectReference>
-    <ProjectReference Include="Cinemachine.Player.csproj">
-      <Project>{B1A7AB67-2230-36E6-82D1-A02AA8D430B8}</Project>
-      <Name>Cinemachine.Player</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

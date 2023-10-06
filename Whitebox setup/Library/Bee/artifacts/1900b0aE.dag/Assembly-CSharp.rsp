@@ -345,10 +345,10 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.VSCode.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
-"Assets/playerCam.cs"
+"Assets/Scripts/playerCam.cs"
+"Assets/Scripts/playerController.cs"
 "Assets/Scripts/playerMovement.cs"
 "Assets/Scripts/RobotManager.cs"
-"Assets/Scripts/RobotManagerEditor.cs"
 -langversion:9.0
 
 /deterministic
