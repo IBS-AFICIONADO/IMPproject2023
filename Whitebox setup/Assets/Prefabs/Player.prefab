@@ -605,7 +605,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   turnRate: 50
+  groundDrag: 0
   Orientation: {fileID: 0}
+  ground:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &6412743306518372232
 GameObject:
   m_ObjectHideFlags: 0

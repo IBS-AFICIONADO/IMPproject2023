@@ -7,7 +7,12 @@ public class playerMovement : MonoBehaviour
     public float speed;
     public float turnRate;
     public float groundDrag;
+    public float groundingForce;
     public Transform Orientation;
+
+    [Header(" Layer of ground objects")]
+    public LayerMask Groundlayer;
+
 
     private float horizontalInput;
     private float verticalInput;
@@ -17,8 +22,9 @@ public class playerMovement : MonoBehaviour
     private Rigidbody playerRB;
 
     private float playerHeight;
-    public LayerMask ground;
     private  bool grounded;
+    private bool playerInput;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,13 +38,15 @@ public class playerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, ground);
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, Groundlayer);
+       // Debug.Log(playerInput + " " + grounded);
         physics();
         input();
-        if (grounded)
-        {
-          //  Debug.Log();
-        }
+         
+       
+        
+
+
     }
 
     private void FixedUpdate()
@@ -48,6 +56,7 @@ public class playerMovement : MonoBehaviour
 
     private void input()
     {
+        playerInput = Input.anyKey;
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
     }
@@ -66,6 +75,9 @@ public class playerMovement : MonoBehaviour
         else
             playerRB.drag = 0;
 
+        if (!playerInput && grounded)
+            playerRB.drag = groundDrag * 10;
+
         Vector3 xzVelocity = new Vector3(playerRB.velocity.x, 0f, playerRB.velocity.z);
 
         if (xzVelocity.magnitude > speed)
@@ -73,5 +85,19 @@ public class playerMovement : MonoBehaviour
             Vector3 cappedVelocity = xzVelocity.normalized * speed;
             playerRB.velocity = new Vector3(cappedVelocity.x, playerRB.velocity.y, cappedVelocity.z);
         }
+
+        if (!grounded)
+        {
+            RaycastHit hit;
+            Ray downRay = new Ray(transform.position, Vector3.down);
+            if (Physics.Raycast(downRay, out hit))
+            {
+                float distanceToGround =  hit.distance - playerHeight * 0.5f;
+                float pushDown = distanceToGround * groundingForce * 10 - playerRB.velocity.y *.5f ;
+                Debug.Log(pushDown);
+                playerRB.AddForce(pushDown * Vector3.down);
+            }
+        }
+
     }
 }
