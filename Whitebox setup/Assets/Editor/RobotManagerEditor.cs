@@ -12,7 +12,11 @@ public class RobotManagerEditor : Editor
 
         //drawing circle with radius of viewing radius
         Handles.color = Color.white;
-        Handles.DrawWireArc(fov.transform.position, Vector3.up, Vector3.forward, 360, fov.radius);
+        Handles.DrawWireArc(fov.transform.position, Vector3.up, Vector3.forward, 360, fov.visionRadius);
+
+        //draw circle for hearingradius
+        Handles.DrawWireArc(fov.transform.position, Vector3.up, Vector3.forward, 360, fov.hearingRadius);
+
         //setting color to alertness level and drawing vision cone
         Color c = Color.green;
         if (fov.alertStage == AlertStage.Intrigued)
@@ -26,7 +30,7 @@ public class RobotManagerEditor : Editor
         Handles.color = new Color(c.r, c.g, c.b, 0.1f);
         Handles.DrawSolidArc(fov.transform.position, fov.transform.up,
             Quaternion.AngleAxis(-fov.fovAngle / 2f, fov.transform.up) * fov.transform.forward,
-            fov.fovAngle, fov.radius);
+            fov.fovAngle, fov.visionRadius);
 
         //drawing raycastline 
         if (fov.playerInFOV)
@@ -34,6 +38,8 @@ public class RobotManagerEditor : Editor
             Handles.color = Color.cyan;
             Handles.DrawLine(fov.transform.position, fov.targetRef.transform.position);
         }
+
+
 
 
 

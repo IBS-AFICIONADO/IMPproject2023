@@ -94,7 +94,6 @@ public class playerMovement : MonoBehaviour
             {
                 float distanceToGround =  hit.distance - playerHeight * 0.5f;
                 float pushDown = distanceToGround * groundingForce * 10 - playerRB.velocity.y *.5f ;
-                Debug.Log(pushDown);
                 playerRB.AddForce(pushDown * Vector3.down);
             }
         }

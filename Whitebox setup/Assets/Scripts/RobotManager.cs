@@ -15,7 +15,7 @@ public enum AlertStage
 public class RobotManager : MonoBehaviour
 {
     //parameters vision
-    public float radius;
+    public float visionRadius;
     [Range(0, 360)] public float fovAngle;
 
     //parameters before enum change
@@ -42,8 +42,10 @@ public class RobotManager : MonoBehaviour
     //moving AI bits
     NavMeshAgent agent;
     private Vector3 player;
-    
-    //on start all enemies are set to peaceful 
+
+    //hearing + powerup radius
+    public float hearingRadius;
+   
     private void Awake()
     {
         alertStage = AlertStage.Peaceful;
@@ -73,10 +75,18 @@ public class RobotManager : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Stun"))
+        {
+            StartCoroutine(stunned());
+        }
+    }
+
     private void FOVCheck()
     {
         //check if there are any other colliders in a sphere with view radius on the targetlayer specific layer prevents from scanning all layers every iteration
-        Collider[] targetsInFOV = Physics.OverlapSphere(transform.position, radius, targetMask);
+        Collider[] targetsInFOV = Physics.OverlapSphere(transform.position, visionRadius, targetMask);
         if (targetsInFOV.Length != 0)
         {
             foreach (Collider c in targetsInFOV)
@@ -101,15 +111,15 @@ public class RobotManager : MonoBehaviour
                     else
                         playerInFOV = false;
                 }
-
-               // if(c.CompareTag("Distraction"))
-               // {
-
-               // }
             }
         }
         else if (playerInFOV)
             playerInFOV = false;
+    }
+
+    private void hearingCheck()
+    {
+
     }
 
     private void UpdateAlertstate(bool playerinFOV)
@@ -172,5 +182,16 @@ public class RobotManager : MonoBehaviour
         }
         else if(alertStage == AlertStage.Peaceful)
             agent.isStopped = true;
+    }
+
+    private IEnumerator stunned()
+    {
+        WaitForSeconds wait = new WaitForSeconds(0.05f);
+        while (true)
+        {
+            yield return wait;
+            
+            agent.isStopped = true;
+        }
     }
 }
