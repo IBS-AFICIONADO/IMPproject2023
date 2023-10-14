@@ -43,9 +43,14 @@ public class RobotManager : MonoBehaviour
     NavMeshAgent agent;
     private Vector3 player;
 
-    //hearing + powerup radius
+    //hearing + powerup stuff
     public float hearingRadius;
-   
+
+    public float stunTime;
+    private bool isStunned;
+    private float initialRadius;
+
+
     private void Awake()
     {
         alertStage = AlertStage.Peaceful;
@@ -59,6 +64,7 @@ public class RobotManager : MonoBehaviour
     {
         //by using a coroutine that runs every .5 seconds load is lower 
         StartCoroutine(FOVRoutine());
+        Debug.Log("stopped: "+agent.isStopped +" stunned: " + isStunned+" has path:"+ agent.hasPath );
 
     }
 
@@ -79,6 +85,8 @@ public class RobotManager : MonoBehaviour
     {
         if (other.CompareTag("Stun"))
         {
+            //agent.isStopped = true;
+            //agent.Re setPath();
             StartCoroutine(stunned());
         }
     }
@@ -170,28 +178,50 @@ public class RobotManager : MonoBehaviour
     
     private void moveTo()
     {
-        if (alertStage == AlertStage.Alerted)
+        if (!isStunned)
         {
-            player = targetRef.transform.position;
-            agent.isStopped = false;
-            agent.SetDestination(player);
-        } else if (alertStage == AlertStage.Intrigued && !agent.isStopped)
-        {
-            player = targetRef.transform.position;
-            agent.SetDestination(player);
+            if (alertStage == AlertStage.Alerted)
+            {
+                player = targetRef.transform.position;
+                agent.isStopped = false;
+                agent.SetDestination(player);
+            }
+            else if (alertStage == AlertStage.Intrigued && !agent.isStopped)
+            {
+                player = targetRef.transform.position;
+                agent.SetDestination(player);
+            }
+            else if (alertStage == AlertStage.Peaceful)
+                agent.isStopped = true;
         }
-        else if(alertStage == AlertStage.Peaceful)
-            agent.isStopped = true;
     }
 
     private IEnumerator stunned()
     {
-        WaitForSeconds wait = new WaitForSeconds(0.05f);
-        while (true)
+        
+        WaitForSeconds stunCooldown = new WaitForSeconds(5f);
+        while (!isStunned)
         {
-            yield return wait;
-            
+            initialRadius = visionRadius;
+            visionRadius = 0;
+            agent.ResetPath();
             agent.isStopped = true;
+            agent.velocity = Vector3.zero;
+            isStunned = true;
+            visionRadius = 0;
+            yield return null;
         }
+    
+        yield return new WaitForSeconds(stunTime);
+        
+        while (isStunned)
+        {
+            visionRadius = initialRadius;
+            Debug.Log(initialRadius); ;
+            isStunned = false;
+            yield return null;
+        }
+        yield return stunCooldown;
+       // Debug.Log("stun over");
     }
 }

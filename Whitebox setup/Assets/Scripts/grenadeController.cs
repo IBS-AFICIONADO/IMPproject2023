@@ -13,7 +13,8 @@ public class grenadeController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        Physics.IgnoreCollision(player.GetComponent<Collider>(), GetComponent<Collider>());
     }
 
     // Update is called once per frame
@@ -23,7 +24,7 @@ public class grenadeController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        //Destroy(parent);
+       
         if (!exploded)
         {
             exploded = true;
@@ -36,13 +37,18 @@ public class grenadeController : MonoBehaviour
     }
     private IEnumerator explode()
     {
-        WaitForSeconds wait = new WaitForSeconds(0.02f);
+        WaitForSeconds wait = new WaitForSeconds(1f);
         while (radius > effectAreaPrefab.transform.localScale.x)
         {
+            effectAreaPrefab.transform.localScale += Vector3.one * Time.deltaTime * expandFactor;
             yield return wait;
-                effectAreaPrefab.transform.localScale += Vector3.one * Time.deltaTime * expandFactor;  
         }
-        yield return null;
+        while (radius <= effectAreaPrefab.transform.localScale.x)
+        {
+            Destroy(effectAreaPrefab);
+            Destroy(parent);
+            yield return null;
+        }
 
     }
 }
