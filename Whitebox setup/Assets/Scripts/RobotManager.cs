@@ -85,8 +85,6 @@ public class RobotManager : MonoBehaviour
     {
         if (other.CompareTag("Stun"))
         {
-            //agent.isStopped = true;
-            //agent.Re setPath();
             StartCoroutine(stunned());
         }
     }
@@ -178,7 +176,7 @@ public class RobotManager : MonoBehaviour
     
     private void moveTo()
     {
-        if (!isStunned)
+        if (!isStunned && targetRef.CompareTag("Player"))
         {
             if (alertStage == AlertStage.Alerted)
             {
@@ -204,10 +202,14 @@ public class RobotManager : MonoBehaviour
         {
             initialRadius = visionRadius;
             visionRadius = 0;
+
             agent.ResetPath();
             agent.isStopped = true;
             agent.velocity = Vector3.zero;
             isStunned = true;
+
+            alertStage = AlertStage.Peaceful;
+            alertLevel = 0;
             visionRadius = 0;
             yield return null;
         }

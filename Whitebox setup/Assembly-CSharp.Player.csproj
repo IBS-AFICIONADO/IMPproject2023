@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\RobotManager.cs" />
     <Compile Include="Assets\Scripts\EnemyStun.cs" />
     <Compile Include="Assets\Scripts\playerCam.cs" />
+    <Compile Include="Assets\powerups.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

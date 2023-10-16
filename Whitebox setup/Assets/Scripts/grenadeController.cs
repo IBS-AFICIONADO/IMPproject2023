@@ -10,11 +10,13 @@ public class grenadeController : MonoBehaviour
     public float expandFactor;
     private bool exploded = false;
     private GameObject effectAreaPrefab;
+    [SerializeField]
+    private GameObject player;
     // Start is called before the first frame update
     void Start()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        Physics.IgnoreCollision(player.GetComponent<Collider>(), GetComponent<Collider>());
+        //Physics.IgnoreCollision(player.GetComponent<Collider>(), GetComponent<Collider>());
+        Physics.IgnoreLayerCollision(0, 6);
     }
 
     // Update is called once per frame

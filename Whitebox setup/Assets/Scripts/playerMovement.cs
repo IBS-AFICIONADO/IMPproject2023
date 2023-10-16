@@ -38,20 +38,24 @@ public class playerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, Groundlayer);
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.1f, Groundlayer);
        // Debug.Log(playerInput + " " + grounded);
         physics();
         input();
-         
-       
-        
-
 
     }
 
     private void FixedUpdate()
     {
         move();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Robot"))
+        {
+            Debug.Log("game over :(");
+        }
     }
 
     private void input()
