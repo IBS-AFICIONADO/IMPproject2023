@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -16,6 +17,11 @@ public class RobotManager : MonoBehaviour
 {
     //parameters vision
     public float radius;
+    public NavMeshAgent navMeshAgent;
+    public Transform[] waypoints;
+
+    int m_CurrentWaypointIndex;
+
     [Range(0, 360)] public float fovAngle;
 
     //parameters before enum change
@@ -43,13 +49,17 @@ public class RobotManager : MonoBehaviour
     NavMeshAgent agent;
     private Vector3 player;
     
-    //on start all enemies are set to peaceful 
+    //on start all enemies are set to peaceful
+    
+
     private void Awake()
     {
+        navMeshAgent.SetDestination(waypoints[0].position);
         alertStage = AlertStage.Peaceful;
         alertLevel = 0;
         agent = GetComponent<NavMeshAgent>();
         targetRef = GameObject.FindGameObjectWithTag("Player");
+       
     }
 
 
@@ -57,16 +67,25 @@ public class RobotManager : MonoBehaviour
     {
         //by using a coroutine that runs every .5 seconds load is lower 
         StartCoroutine(FOVRoutine());
-
+        Move();
+        moveTo();
+    }
+    private void Move()
+    {
+        if (navMeshAgent.remainingDistance < navMeshAgent.stoppingDistance)
+        {
+            m_CurrentWaypointIndex = (m_CurrentWaypointIndex + 1) % waypoints.Length;
+            navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
+        }
     }
 
     private IEnumerator FOVRoutine()
     {
-        WaitForSeconds wait = new WaitForSeconds(0.5f);
+       //  WaitForSeconds wait = new WaitForSeconds(0.5f);
 
         while (true)
         {
-            yield return wait;
+            // yield return wait;
             FOVCheck();
             UpdateAlertstate(playerInFOV);
             moveTo();
@@ -160,6 +179,8 @@ public class RobotManager : MonoBehaviour
     
     private void moveTo()
     {
+        
+
         if (alertStage == AlertStage.Alerted)
         {
             player = targetRef.transform.position;
