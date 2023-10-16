@@ -15,7 +15,7 @@ public enum AlertStage
 public class RobotManager : MonoBehaviour
 {
     //parameters vision
-    public float radius;
+    public float visionRadius;
     [Range(0, 360)] public float fovAngle;
 
     //parameters before enum change
@@ -42,8 +42,15 @@ public class RobotManager : MonoBehaviour
     //moving AI bits
     NavMeshAgent agent;
     private Vector3 player;
-    
-    //on start all enemies are set to peaceful 
+
+    //hearing + powerup stuff
+    public float hearingRadius;
+
+    public float stunTime;
+    private bool isStunned;
+    private float initialRadius;
+
+
     private void Awake()
     {
         alertStage = AlertStage.Peaceful;
@@ -57,6 +64,7 @@ public class RobotManager : MonoBehaviour
     {
         //by using a coroutine that runs every .5 seconds load is lower 
         StartCoroutine(FOVRoutine());
+        Debug.Log("stopped: "+agent.isStopped +" stunned: " + isStunned+" has path:"+ agent.hasPath );
 
     }
 
@@ -73,10 +81,20 @@ public class RobotManager : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Stun"))
+        {
+            //agent.isStopped = true;
+            //agent.Re setPath();
+            StartCoroutine(stunned());
+        }
+    }
+
     private void FOVCheck()
     {
         //check if there are any other colliders in a sphere with view radius on the targetlayer specific layer prevents from scanning all layers every iteration
-        Collider[] targetsInFOV = Physics.OverlapSphere(transform.position, radius, targetMask);
+        Collider[] targetsInFOV = Physics.OverlapSphere(transform.position, visionRadius, targetMask);
         if (targetsInFOV.Length != 0)
         {
             foreach (Collider c in targetsInFOV)
@@ -101,15 +119,15 @@ public class RobotManager : MonoBehaviour
                     else
                         playerInFOV = false;
                 }
-
-               // if(c.CompareTag("Distraction"))
-               // {
-
-               // }
             }
         }
         else if (playerInFOV)
             playerInFOV = false;
+    }
+
+    private void hearingCheck()
+    {
+
     }
 
     private void UpdateAlertstate(bool playerinFOV)
@@ -160,17 +178,50 @@ public class RobotManager : MonoBehaviour
     
     private void moveTo()
     {
-        if (alertStage == AlertStage.Alerted)
+        if (!isStunned)
         {
-            player = targetRef.transform.position;
-            agent.isStopped = false;
-            agent.SetDestination(player);
-        } else if (alertStage == AlertStage.Intrigued && !agent.isStopped)
-        {
-            player = targetRef.transform.position;
-            agent.SetDestination(player);
+            if (alertStage == AlertStage.Alerted)
+            {
+                player = targetRef.transform.position;
+                agent.isStopped = false;
+                agent.SetDestination(player);
+            }
+            else if (alertStage == AlertStage.Intrigued && !agent.isStopped)
+            {
+                player = targetRef.transform.position;
+                agent.SetDestination(player);
+            }
+            else if (alertStage == AlertStage.Peaceful)
+                agent.isStopped = true;
         }
-        else if(alertStage == AlertStage.Peaceful)
+    }
+
+    private IEnumerator stunned()
+    {
+        
+        WaitForSeconds stunCooldown = new WaitForSeconds(5f);
+        while (!isStunned)
+        {
+            initialRadius = visionRadius;
+            visionRadius = 0;
+            agent.ResetPath();
             agent.isStopped = true;
+            agent.velocity = Vector3.zero;
+            isStunned = true;
+            visionRadius = 0;
+            yield return null;
+        }
+    
+        yield return new WaitForSeconds(stunTime);
+        
+        while (isStunned)
+        {
+            visionRadius = initialRadius;
+            Debug.Log(initialRadius); ;
+            isStunned = false;
+            yield return null;
+        }
+        yield return stunCooldown;
+       // Debug.Log("stun over");
     }
 }
