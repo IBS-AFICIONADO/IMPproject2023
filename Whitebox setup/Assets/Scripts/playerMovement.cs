@@ -38,14 +38,9 @@ public class playerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, Groundlayer);
-       // Debug.Log(playerInput + " " + grounded);
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.1f, Groundlayer);
         physics();
         input();
-         
-       
-        
-
 
     }
 
@@ -54,9 +49,11 @@ public class playerMovement : MonoBehaviour
         move();
     }
 
+   
+
     private void input()
     {
-        playerInput = Input.anyKey;
+        playerInput = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A)|| Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
     }

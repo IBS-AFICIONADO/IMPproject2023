@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\playerController.cs" />
     <Compile Include="Assets\Scripts\grenadeController.cs" />
+    <Compile Include="Assets\powerups.cs" />
     <Compile Include="Assets\Scripts\playerMovement.cs" />
     <Compile Include="Assets\Scripts\RobotManager.cs" />
     <Compile Include="Assets\Scripts\EnemyStun.cs" />

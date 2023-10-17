@@ -47,8 +47,11 @@ MonoBehaviour:
   stunGrenade: {fileID: 5844798309994836386, guid: 74c3d6337bd6bfb40b9a111fcf8bedea, type: 3}
   throwForce: 0
   cam: {fileID: 0}
-  spawner: {fileID: 307441938}
+  LineRenderer: {fileID: 0}
+  releasePosition: {fileID: 0}
   LinePoints: 0
+  timeBetweenpoints: 0
+  upforce: 0
 --- !u!1 &1326085208296583740
 GameObject:
   m_ObjectHideFlags: 0
@@ -510,6 +513,7 @@ GameObject:
   - component: {fileID: 1326085209165253192}
   - component: {fileID: 5657645675396090803}
   - component: {fileID: 278371286}
+  - component: {fileID: 931229228620792232}
   - component: {fileID: 468397055}
   m_Layer: 6
   m_Name: Player
@@ -569,6 +573,25 @@ MonoBehaviour:
   Groundlayer:
     serializedVersion: 2
     m_Bits: 128
+--- !u!114 &931229228620792232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1326085209165253175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0ec24e3c42d04e48bb2087c85c44b09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerObject: {fileID: 1326085209165253175}
+  invisDeplete: 0
+  invisCharge: 0
+  invisibleTimer: 100
+  materials:
+  - {fileID: 2100000, guid: 057a40d6fdcee2f48bf316042ffd0225, type: 2}
+  - {fileID: 2100000, guid: 8b7f7a2300afdf542900cadff0fb454a, type: 2}
 --- !u!54 &468397055
 Rigidbody:
   m_ObjectHideFlags: 0

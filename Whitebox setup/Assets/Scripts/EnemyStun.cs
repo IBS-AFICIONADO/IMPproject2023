@@ -30,21 +30,21 @@ public class EnemyStun : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-
+        LineRenderer.enabled = false;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
         if (Input.GetMouseButton(1))
         {
-            
+
             holdProjectile();
             drawProjection();
             available = false;
-        } 
+        }
         if (Input.GetMouseButtonUp(1))
         {
             LineRenderer.enabled = false;
@@ -65,7 +65,8 @@ public class EnemyStun : MonoBehaviour
         projectileRB.AddForce(cam.transform.forward * throwForce + upforce * transform.up, ForceMode.Impulse);
     }
 
-    private void holdProjectile (){
+    private void holdProjectile()
+    {
 
         if (available)
         {
@@ -83,7 +84,7 @@ public class EnemyStun : MonoBehaviour
         Vector3 startVelocity = throwForce * cam.transform.forward + upforce * transform.up / projectileRB.mass;
         int i = 0;
         LineRenderer.SetPosition(i, startPosition);
-        for(float time = 0; time<LinePoints; time+= timeBetweenpoints)
+        for (float time = 0; time < LinePoints; time += timeBetweenpoints)
         {
             i++;
             Vector3 point = startPosition + time * startVelocity;
@@ -91,4 +92,11 @@ public class EnemyStun : MonoBehaviour
             LineRenderer.SetPosition(i, point);
         }
     }
+
+    private void OnDrawGizmos()
+    {
+        
+    }
 }
+
+
