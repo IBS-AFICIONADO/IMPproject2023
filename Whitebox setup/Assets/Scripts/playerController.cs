@@ -11,8 +11,8 @@ public class playerController : MonoBehaviour
     [SerializeField]
     private float invisDeplete;
     [SerializeField]
-    [Range(0,100)]
     private float invisCharge;
+    [Range(0, 100)]
     public float invisibleTimer = 100;
     [SerializeField]
     private Material[] materials = new Material[2];
