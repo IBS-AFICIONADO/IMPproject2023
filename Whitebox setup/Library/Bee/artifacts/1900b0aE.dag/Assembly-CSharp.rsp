@@ -369,6 +369,7 @@
 "Assets/Scripts/playerController.cs"
 "Assets/Scripts/playerMovement.cs"
 "Assets/Scripts/RobotManager.cs"
+"Assets/UIController.cs"
 -langversion:9.0
 
 /deterministic

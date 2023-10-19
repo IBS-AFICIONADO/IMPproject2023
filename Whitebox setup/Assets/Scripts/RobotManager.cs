@@ -64,7 +64,7 @@ public class RobotManager : MonoBehaviour
     {
         //by using a coroutine that runs every .5 seconds load is lower 
         StartCoroutine(FOVRoutine());
-        Debug.Log("stopped: "+agent.isStopped +" stunned: " + isStunned+" has path:"+ agent.hasPath );
+        //Debug.Log("stopped: "+agent.isStopped +" stunned: " + isStunned+" has path:"+ agent.hasPath );
 
     }
 
