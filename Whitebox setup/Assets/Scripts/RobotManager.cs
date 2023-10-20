@@ -31,7 +31,10 @@ public class RobotManager : MonoBehaviour
     public LayerMask targetMask;
     public LayerMask obstructionMask;
 
-    //parameters needed in the editor but not important for changing in editor
+    //parameters for drawing vision cone
+    public float meshResolution;
+
+    //parameters needed in the editor but not important for changing in unity inspector
     [HideInInspector]
     public bool playerInFOV;
     [HideInInspector]
@@ -46,6 +49,7 @@ public class RobotManager : MonoBehaviour
     //hearing + powerup stuff
     public float hearingRadius;
 
+    //variables for getting hit with stun
     public float stunTime;
     private bool isStunned;
     private float initialRadius;
@@ -67,6 +71,13 @@ public class RobotManager : MonoBehaviour
         //Debug.Log("stopped: "+agent.isStopped +" stunned: " + isStunned+" has path:"+ agent.hasPath );
 
     }
+    private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Stun"))
+            {
+                StartCoroutine(stunned());
+            }
+        }
 
     private IEnumerator FOVRoutine()
     {
@@ -76,16 +87,52 @@ public class RobotManager : MonoBehaviour
         {
             yield return wait;
             FOVCheck();
+            drawFOV();
             UpdateAlertstate(playerInFOV);
             moveTo();
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Stun"))
+    private IEnumerator stunned()
         {
-            StartCoroutine(stunned());
+        
+            WaitForSeconds stunCooldown = new WaitForSeconds(5f);
+            while (!isStunned)
+            {
+                initialRadius = visionRadius;
+                visionRadius = 0;
+
+                agent.ResetPath();
+                agent.isStopped = true;
+                agent.velocity = Vector3.zero;
+                isStunned = true;
+
+                alertStage = AlertStage.Peaceful;
+                alertLevel = 0;
+                visionRadius = 0;
+                yield return null;
+            }
+    
+            yield return new WaitForSeconds(stunTime);
+        
+            while (isStunned)
+            {
+                visionRadius = initialRadius;
+                Debug.Log(initialRadius); ;
+                isStunned = false;
+                yield return null;
+            }
+            yield return stunCooldown;
+           // Debug.Log("stun over");
+        }
+    void drawFOV()
+    {
+        int stepCount = Mathf.RoundToInt(fovAngle * meshResolution);
+        float stepAngleSize = fovAngle / stepCount;
+
+        for (int i = 0; i <= stepCount; i++){
+            float angle = transform.eulerAngles.y - fovAngle / 2 + stepAngleSize*i ;
+            Debug.DrawLine(transform.position, transform.position + DirFromAngle(angle,true)* visionRadius,Color.magenta);
         }
     }
 
@@ -194,36 +241,13 @@ public class RobotManager : MonoBehaviour
         }
     }
 
-    private IEnumerator stunned()
+    public Vector3 DirFromAngle(float angleInDeg, bool isGlobal)
     {
-        
-        WaitForSeconds stunCooldown = new WaitForSeconds(5f);
-        while (!isStunned)
+        if (!isGlobal)
         {
-            initialRadius = visionRadius;
-            visionRadius = 0;
-
-            agent.ResetPath();
-            agent.isStopped = true;
-            agent.velocity = Vector3.zero;
-            isStunned = true;
-
-            alertStage = AlertStage.Peaceful;
-            alertLevel = 0;
-            visionRadius = 0;
-            yield return null;
+            angleInDeg += transform.eulerAngles.y;
         }
-    
-        yield return new WaitForSeconds(stunTime);
-        
-        while (isStunned)
-        {
-            visionRadius = initialRadius;
-            Debug.Log(initialRadius); ;
-            isStunned = false;
-            yield return null;
-        }
-        yield return stunCooldown;
-       // Debug.Log("stun over");
+        return new Vector3(Mathf.Sin(angleInDeg * Mathf.Deg2Rad), 0, Mathf.Cos(angleInDeg * Mathf.Deg2Rad));
     }
+    
 }
