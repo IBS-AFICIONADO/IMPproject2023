@@ -50,6 +50,14 @@ public class RobotManager : MonoBehaviour
     private bool isStunned;
     private float initialRadius;
 
+    //For the waypoint
+    public Transform[] waypoints;
+    int m_CurrentWaypointIndex;
+
+    private void Start()
+    {
+        agent.SetDestination(waypoints[0].position);
+    }
 
     private void Awake()
     {
@@ -62,6 +70,12 @@ public class RobotManager : MonoBehaviour
 
     private void Update()
     {
+        //waypoints
+        if (agent.remainingDistance < agent.stoppingDistance)
+        {
+            m_CurrentWaypointIndex = (m_CurrentWaypointIndex + 1) % waypoints.Length;
+            agent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
+        }
         //by using a coroutine that runs every .5 seconds load is lower 
         StartCoroutine(FOVRoutine());
         Debug.Log("stopped: "+agent.isStopped +" stunned: " + isStunned+" has path:"+ agent.hasPath );

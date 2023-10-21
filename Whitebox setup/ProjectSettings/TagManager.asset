@@ -8,6 +8,7 @@ TagManager:
   - Power
   - Invisible
   - Robot
+  - Object
   layers:
   - Default
   - TransparentFX

@@ -14,6 +14,9 @@ scopes = {
 	"last_search.DA949528" = "layer"
 	"OpenInspectorPreview.DA949528" = "0"
 	"currentGroup.DA949528" = "settings"
+	"last_search.310DEAF1" = "pre computed"
+	"OpenInspectorPreview.310DEAF1" = "0"
+	"currentGroup.310DEAF1" = "all"
 }
 providers = {
 	adb = {
