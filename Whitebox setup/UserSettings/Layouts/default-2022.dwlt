@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Scene
+  m_Title: Project
   m_RootView: {fileID: 4}
   m_MinSize: {x: 875, y: 321}
   m_MaxSize: {x: 10000, y: 10000}
@@ -174,7 +174,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 50}
   m_MaxSize: {x: 32384, y: 8096}
   vertical: 0
-  controlID: 130
+  controlID: 115
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -221,8 +221,8 @@ MonoBehaviour:
     y: 0
     width: 409
     height: 939
-  m_MinSize: {x: 275, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 121}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
@@ -250,8 +250,8 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 19
-    width: 299
+    y: 73
+    width: 210
     height: 918
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -659,9 +659,9 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
-      snapOffset: {x: 48, y: 48}
+      snapOffset: {x: -216, y: -220}
       snapOffsetDelta: {x: 0, y: 0}
-      snapCorner: 0
+      snapCorner: 3
       id: AINavigationOverlay
       index: 7
       layout: 4
@@ -717,9 +717,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 9.035999, y: -17.858128, z: 2.984527}
+    m_Target: {x: -17.816483, y: -16.51249, z: -22.717548}
     speed: 2
-    m_Value: {x: 9.035999, y: -17.858128, z: 2.984527}
+    m_Value: {x: -17.816483, y: -16.51249, z: -22.717548}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -765,20 +765,20 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.24706838, y: 0.68692964, z: -0.27040893, w: 0.6277146}
+    m_Target: {x: 0.17706569, y: -0.5867265, z: 0.13333356, w: 0.77891153}
     speed: 2
-    m_Value: {x: 0.24706075, y: 0.6869084, z: -0.27040058, w: 0.6276952}
+    m_Value: {x: 0.17608853, y: -0.58573264, z: 0.13218386, w: 0.78002405}
   m_Size:
-    m_Target: 42.662384
+    m_Target: 44.91919
     speed: 2
-    m_Value: 42.662384
+    m_Value: 44.91919
   m_Ortho:
     m_Target: 0
     speed: 2
     m_Value: 0
   m_CameraSettings:
-    m_Speed: 1.1840998
-    m_SpeedNormalized: 0.5899999
+    m_Speed: 1.4228996
+    m_SpeedNormalized: 0.7099998
     m_SpeedMin: 0.01
     m_SpeedMax: 2
     m_EasingEnabled: 1
@@ -833,9 +833,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: b0680000
       m_LastClickedID: 0
-      m_ExpandedIDs: 7889feff0e8bfeff2c93feff2e93feff7494feff5e95feff2a9cfefffa9dfeff9ca1feff78a8feff00d0feff0cd0feff16d0feff8ad2feff82e1feff6ce2feff26e4feff20e5feff74e7feffaee9feff0809ffff0a09ffff4a10ffff9e17ffffa017ffff2c1affff721effff3e21ffff2661ffff2ab7ffff58b7ffff90b7ffff9cb7ffffe2b7ffff08b9ffff4acaffff54caffff02cbffff28ccffff96f2ffff22f7ffff12fbffffdc6100003e620000f06200006a65000072670000a4ab000006ac0000
+      m_ExpandedIDs: d01df6fffc1df6ff2c1ef6ff3a1ef6ff8a20f6ff8cf7fffffefaffffae63000010640000186c0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -903,7 +903,8 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SkipHidden: 0
     m_SearchArea: 1
-    m_Folders: []
+    m_Folders:
+    - Assets/FantasyEnvironments/Environments/Ambient-Occlusion-Trees/Materials
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -920,7 +921,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: c4770000
     m_LastClickedID: 30660
-    m_ExpandedIDs: 00000000286100002a6100002c6100002e61000030610000326100003461000036610000386100003a6100003c6100003e610000
+    m_ExpandedIDs: 0000000036630000386300003a6300003c6300003e63000040630000426300004463000046630000486300004a630000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -948,18 +949,18 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff00000000286100002a6100002e61000030610000326100003461000036610000386100003a6100003c6100003e610000
+    m_ExpandedIDs: 6a2df6ffffffffff0000000036630000386300003c6300003e6300004263000044630000486300004a6300002a6800002e6800003e680000426800004a6800008c7500009075000094750000a4750000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: PickUp
-      m_OriginalName: PickUp
+      m_Name: Tree_bark1
+      m_OriginalName: Tree_bark1
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 31362
+      m_UserData: 26742
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0
