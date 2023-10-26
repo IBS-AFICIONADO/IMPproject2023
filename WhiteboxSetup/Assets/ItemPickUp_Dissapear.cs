@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class ItemPickUp_Dissapear : MonoBehaviour
 {
+    public LayerMask uhm;
     public GameObject PickText;
+    public GameObject self;
     // Start is called before the first frame update
     void Start()
     {
@@ -12,14 +14,22 @@ public class ItemPickUp_Dissapear : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void OnTriggerStay(Collider other)
+    private void Update()
     {
-        if (other.gameObject.tag == "Player")
+        Collider[] targets = Physics.OverlapSphere(transform.position, 5, uhm);
+        if (targets.Length != 0)
         {
-            PickText.SetActive(true);
-            if (Input.GetKey(KeyCode.E))
+            foreach (Collider c in targets)
             {
-                PickText.SetActive(false);
+                if (c.CompareTag("Player"))
+                {
+                    PickText.SetActive(true);
+                    if (Input.GetKey(KeyCode.E))
+                    {
+                        PickText.SetActive(false);
+                        Destroy(self,0.3f);
+                    }
+                }
             }
         }
     }

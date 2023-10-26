@@ -16,6 +16,7 @@ public class playerController : MonoBehaviour
     [SerializeField]
     private Material[] materials = new Material[2];
     private bool cooldown = false;
+    public GameObject wompwomp;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,8 +50,8 @@ public class playerController : MonoBehaviour
     {
         if (collision.collider.CompareTag("Robot"))
         {
-            Debug.Log("game over :(");
-        }
+            wompwomp.SetActive(true);
+                }
     }
     private void invisible()
     {

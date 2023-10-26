@@ -99,18 +99,15 @@ public class RobotManager : MonoBehaviour
             }
         }
 
+    private void Update()
+    {
+        Debug.Log(agent.isStopped+" "+agent.hasPath);
+    }
+
     private void LateUpdate()
     {
 
-        //waypoints
-        if (agent.remainingDistance < agent.stoppingDistance)
-        {
-            m_CurrentWaypointIndex = (m_CurrentWaypointIndex + 1) % waypoints.Length;
-            agent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
-        }
-        //by using a coroutine that runs every .5 seconds load is lower 
-        Debug.Log("stopped: "+agent.isStopped +" stunned: " + isStunned+" has path:"+ agent.hasPath );
-
+       
         if (visioncone)
         {
             drawFOV();
@@ -128,7 +125,6 @@ public class RobotManager : MonoBehaviour
 
         while (true)
         {
-            Debug.Log("HII");
             yield return wait;
             FOVCheck();
             UpdateAlertstate(playerInFOV);
@@ -145,8 +141,8 @@ public class RobotManager : MonoBehaviour
                 initialRadius = visionRadius;
                 visionRadius = 0;
 
-                agent.ResetPath();
-                agent.isStopped = true;
+               agent.ResetPath();
+               // agent.isStopped = true;
                 agent.velocity = Vector3.zero;
                 isStunned = true;
 
@@ -163,12 +159,12 @@ public class RobotManager : MonoBehaviour
                 visionRadius = initialRadius;
                 Debug.Log(initialRadius); ;
                 isStunned = false;
+                agent.isStopped = false;
                 yield return null;
             }
             yield return stunCooldown;
-           // Debug.Log("stun over");
         }
-
+   
 
     private void FOVCheck()
     {
@@ -180,7 +176,7 @@ public class RobotManager : MonoBehaviour
             {
                 if (c.CompareTag("Player"))
                 {
-                    Debug.Log("something is here");
+                    //Debug.Log("something is here");
 
                     //calculate direction between enemy and player
                     Vector3 directionToTarget = (c.transform.position - transform.position).normalized;
@@ -206,10 +202,7 @@ public class RobotManager : MonoBehaviour
             playerInFOV = false;
     }
 
-    private void hearingCheck()
-    {
-
-    }
+  
 
     private void UpdateAlertstate(bool playerinFOV)
     {
@@ -217,7 +210,6 @@ public class RobotManager : MonoBehaviour
         {
             case AlertStage.Peaceful:
                 alertLevel = 0;
-                agent.isStopped = true;
                 if (playerinFOV)
                     alertStage = AlertStage.Intrigued;
                 break;
@@ -236,6 +228,7 @@ public class RobotManager : MonoBehaviour
                     alertLevel -= forgetSpeed;
                     if (alertLevel <= 0)
                     {
+                        //agent.SetDestination((waypoints[m_CurrentWaypointIndex].position));
                         alertStage = AlertStage.Peaceful;
                     }
                 }
@@ -255,13 +248,12 @@ public class RobotManager : MonoBehaviour
     
     private void moveTo()
     {
+        int LastDestinationIndex = m_CurrentWaypointIndex;
         if (!isStunned)
         {
             if (alertStage == AlertStage.Alerted)
             {
-                
                 player = targetRef.transform.position;
-                agent.isStopped = false;
                 agent.SetDestination(player);
             }
             else if (alertStage == AlertStage.Intrigued && !isStunned)
@@ -270,7 +262,12 @@ public class RobotManager : MonoBehaviour
                 agent.SetDestination(player);
             }
             else if (alertStage == AlertStage.Peaceful)
-                agent.isStopped = true;
+
+                if (agent.remainingDistance < agent.stoppingDistance)
+                {
+                    m_CurrentWaypointIndex = (m_CurrentWaypointIndex + 1) % waypoints.Length;
+                    agent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
+                }
         }
     }
    

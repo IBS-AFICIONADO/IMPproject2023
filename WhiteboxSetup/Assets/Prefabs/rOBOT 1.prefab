@@ -273,7 +273,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 0.2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -293,10 +293,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73859d7ae8085844a919c9b0425c9af5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visionRadius: 16.27
-  fovAngle: 137
+  visionRadius: 10.3
+  fovAngle: 91
   alertSpeed: 2
   forgetSpeed: 2
+  visioncone: 1
   alertStage: 0
   alertLevel: 0
   targetMask:
@@ -312,9 +313,11 @@ MonoBehaviour:
   playerInFOV: 0
   maxAlertEdit: 100
   targetRef: {fileID: 0}
-  hearingRadius: 4.07
+  hearingRadius: 6.85
   stunTime: 2
-  waypoints: []
+  waypoints:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!136 &4598104915098079714
 CapsuleCollider:
   m_ObjectHideFlags: 0
