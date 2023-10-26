@@ -292,7 +292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73859d7ae8085844a919c9b0425c9af5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visionRadius: 2.44
+  visionRadius: 16.27
   fovAngle: 137
   alertSpeed: 2
   forgetSpeed: 2

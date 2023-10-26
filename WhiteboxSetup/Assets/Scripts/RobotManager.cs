@@ -116,10 +116,11 @@ public class RobotManager : MonoBehaviour
 
     private IEnumerator FOVRoutine()
     {
-        WaitForSeconds wait = new WaitForSeconds(0.3f);
+        WaitForSeconds wait = new WaitForSeconds(0.1f);
 
         while (true)
         {
+            Debug.Log("HII");
             yield return wait;
             FOVCheck();
             UpdateAlertstate(playerInFOV);
