@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 307441939}
   - component: {fileID: 307441940}
-  - component: {fileID: 6449921209182697111}
-  m_Layer: 6
+  - component: {fileID: 5724280625202265860}
+  m_Layer: 0
   m_Name: grenadehand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,12 +48,12 @@ MonoBehaviour:
   stunGrenade: {fileID: 5844798309994836386, guid: 74c3d6337bd6bfb40b9a111fcf8bedea, type: 3}
   throwForce: 10
   cam: {fileID: 0}
-  LineRenderer: {fileID: 6449921209182697111}
+  LineRenderer: {fileID: 5724280625202265860}
   releasePosition: {fileID: 307441939}
   LinePoints: 100
   timeBetweenpoints: 0.079
-  upforce: 10
---- !u!120 &6449921209182697111
+  upforce: 5
+--- !u!120 &5724280625202265860
 LineRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
@@ -156,7 +156,7 @@ LineRenderer:
   m_MaskInteraction: 0
   m_UseWorldSpace: 1
   m_Loop: 0
-  m_ApplyActiveColorSpace: 0
+  m_ApplyActiveColorSpace: 1
 --- !u!1 &1326085208296583740
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,7 +205,7 @@ GameObject:
   - component: {fileID: 1326085208429612942}
   m_Layer: 0
   m_Name: Cylinder
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -288,7 +288,7 @@ GameObject:
   - component: {fileID: 1326085208831975668}
   m_Layer: 0
   m_Name: Cylinder (3)
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -371,7 +371,7 @@ GameObject:
   - component: {fileID: 1326085208908322685}
   m_Layer: 0
   m_Name: Cylinder (2)
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -537,7 +537,7 @@ GameObject:
   - component: {fileID: 1326085209112203341}
   m_Layer: 0
   m_Name: Cylinder (1)
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -758,13 +758,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6412743306518372232}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.035, y: -0.1, z: 0.008}
+  m_LocalRotation: {x: -0, y: 0.997263, z: -0, w: -0.073936224}
+  m_LocalPosition: {x: 0.03343773, y: -0.100000024, z: -0.013069153}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1326085209165253192}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 188.48, z: 0}
 --- !u!1 &8998463933315784208
 GameObject:
   m_ObjectHideFlags: 0
@@ -789,8 +789,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8998463933315784208}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.01, y: -0.0021293163, z: -0.01}
+  m_LocalRotation: {x: -0, y: 0.997263, z: -0, w: -0.073936224}
+  m_LocalPosition: {x: -0.008399963, y: -0.0021293163, z: 0.011369705}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -798,4 +798,4 @@ Transform:
   - {fileID: 1326085208296583741}
   - {fileID: 307441939}
   m_Father: {fileID: 1326085209165253192}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 188.48, z: 0}

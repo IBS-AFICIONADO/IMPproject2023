@@ -23,6 +23,8 @@ public class RobotManager : MonoBehaviour
     public float alertSpeed;
     public float forgetSpeed;
 
+    public bool visioncone;
+
 
     public AlertStage alertStage;
     [Range(0, maxAlert)] public float alertLevel;
@@ -109,8 +111,14 @@ public class RobotManager : MonoBehaviour
         //by using a coroutine that runs every .5 seconds load is lower 
         Debug.Log("stopped: "+agent.isStopped +" stunned: " + isStunned+" has path:"+ agent.hasPath );
 
-
-        drawFOV();
+        if (visioncone)
+        {
+            drawFOV();
+        }
+        else
+        {
+            viewMesh.Clear();
+        }
 
     }
 
@@ -170,8 +178,10 @@ public class RobotManager : MonoBehaviour
         {
             foreach (Collider c in targetsInFOV)
             {
-                if (c == targetRef)
+                if (c.CompareTag("Player"))
                 {
+                    Debug.Log("something is here");
+
                     //calculate direction between enemy and player
                     Vector3 directionToTarget = (c.transform.position - transform.position).normalized;
 
