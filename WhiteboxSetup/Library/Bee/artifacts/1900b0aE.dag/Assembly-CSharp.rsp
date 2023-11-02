@@ -378,6 +378,7 @@
 "Assets/Scripts/RobotManager.cs"
 "Assets/Scripts/UIController.cs"
 "Assets/Scripts/viewCone.cs"
+"Assets/viewConeColor.cs"
 -langversion:9.0
 
 /deterministic

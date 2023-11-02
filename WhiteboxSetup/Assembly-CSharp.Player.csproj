@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\patrol.cs" />
     <Compile Include="Assets\Scripts\ItemPickUp_Disapear.cs" />
     <Compile Include="Assets\Scripts\ItemPickUp.cs" />
+    <Compile Include="Assets\viewConeColor.cs" />
     <Compile Include="Assets\Scripts\playerMovement.cs" />
   </ItemGroup>
   <ItemGroup>

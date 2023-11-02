@@ -356,7 +356,6 @@ public class RobotManager : MonoBehaviour
             }
         }
         viewMesh.Clear();
-
         viewMesh.vertices = vertices;
         viewMesh.triangles = triangles;
         viewMesh.RecalculateNormals();
