@@ -59,16 +59,18 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.11f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\ItemPickUp_Disapear.cs" />
     <Compile Include="Assets\Scripts\playerCam.cs" />
-    <Compile Include="Assets\Scripts\powerups.cs" />
     <Compile Include="Assets\Scripts\grenadeController.cs" />
-    <Compile Include="Assets\ItemPickUp_Dissapear.cs" />
     <Compile Include="Assets\Scripts\RobotManager.cs" />
-    <Compile Include="Assets\Scripts\playerController.cs" />
     <Compile Include="Assets\Scripts\EnemyStun.cs" />
+    <Compile Include="Assets\Scripts\ItemPickUp_Dissapear.cs" />
     <Compile Include="Assets\Scripts\PickUp.cs" />
     <Compile Include="Assets\Scripts\UIController.cs" />
+    <Compile Include="Assets\Scripts\magicTank.cs" />
+    <Compile Include="Assets\Scripts\viewCone.cs" />
+    <Compile Include="Assets\Scripts\Powerups.cs" />
+    <Compile Include="Assets\Scripts\patrol.cs" />
+    <Compile Include="Assets\Scripts\ItemPickUp_Disapear.cs" />
     <Compile Include="Assets\Scripts\ItemPickUp.cs" />
     <Compile Include="Assets\Scripts\playerMovement.cs" />
   </ItemGroup>

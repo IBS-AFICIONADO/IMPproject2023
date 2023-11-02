@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -454,6 +454,43 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1326085209165253175, guid: e34dcc98d9bcac24285f223c55d1fb4a, type: 3}
   m_PrefabInstance: {fileID: 115736826}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &400845328 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2065638760580047274, guid: 730d2e2be2c08e14a9a4571fa56413df, type: 3}
+  m_PrefabInstance: {fileID: 8122652662611408921}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &400845330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400845328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eecc764b2f2f864793a875d404167b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  robot: {fileID: 400845331}
+  patrolRange: 50
+  pointAmount: 4
+  idkman: []
+--- !u!114 &400845331 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2394767598316086985, guid: 730d2e2be2c08e14a9a4571fa56413df, type: 3}
+  m_PrefabInstance: {fileID: 8122652662611408921}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400845328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73859d7ae8085844a919c9b0425c9af5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!195 &400845332 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 7688918607770063345, guid: 730d2e2be2c08e14a9a4571fa56413df, type: 3}
+  m_PrefabInstance: {fileID: 8122652662611408921}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &430110004
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,6 +648,17 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &468397056 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 931229228620792232, guid: e34dcc98d9bcac24285f223c55d1fb4a, type: 3}
+  m_PrefabInstance: {fileID: 115736826}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 293320529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0ec24e3c42d04e48bb2087c85c44b09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &479875761
 GameObject:
   m_ObjectHideFlags: 0
@@ -1270,7 +1318,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 710313139}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.06279683, y: -0.0000000042931068, z: 2.7012664e-10, w: 0.9980264}
+  m_LocalRotation: {x: 0.06279683, y: 0.000000004293104, z: -2.701265e-10, w: 0.9980264}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2872,6 +2920,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 931171336231683531, guid: 44438aa1a672c8e4d844461fa73d2eba, type: 3}
+      propertyPath: magicTank
+      value: 
+      objectReference: {fileID: 468397056}
     - target: {fileID: 8729010926451863599, guid: 44438aa1a672c8e4d844461fa73d2eba, type: 3}
       propertyPath: m_Name
       value: HUD
@@ -2933,10 +2985,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: rOBOT
       objectReference: {fileID: 0}
+    - target: {fileID: 2394767598316086985, guid: 730d2e2be2c08e14a9a4571fa56413df, type: 3}
+      propertyPath: agent
+      value: 
+      objectReference: {fileID: 400845332}
+    - target: {fileID: 2394767598316086985, guid: 730d2e2be2c08e14a9a4571fa56413df, type: 3}
+      propertyPath: waypoints.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4598104915098079714, guid: 730d2e2be2c08e14a9a4571fa56413df, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2065638760580047274, guid: 730d2e2be2c08e14a9a4571fa56413df, type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 400845330}
   m_SourcePrefab: {fileID: 100100000, guid: 730d2e2be2c08e14a9a4571fa56413df, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

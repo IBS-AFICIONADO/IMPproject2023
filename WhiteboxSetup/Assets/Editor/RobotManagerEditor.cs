@@ -19,7 +19,7 @@ public class RobotManagerEditor : Editor
 
         //setting color to alertness level and drawing vision cone
         Color c = Color.green;
-        if (fov.alertStage == AlertStage.Intrigued)
+        if (fov.alertStage == AlertStage.IntriguedL1 || fov.alertStage == AlertStage.IntriguedL2)
         {
             c = Color.Lerp(Color.yellow, Color.red, fov.alertLevel / fov.maxAlertEdit);
         }

@@ -293,8 +293,8 @@ public class RobotManager : MonoBehaviour
                 player = targetRef.transform.position;
                 agent.SetDestination(player);
             }
-            else if (alertStage == AlertStage.Peaceful)
-
+            else if (alertStage == AlertStage.Peaceful && waypoints.Length != 0)
+            
             if (agent.remainingDistance < agent.stoppingDistance)
             {
                 m_CurrentWaypointIndex = (m_CurrentWaypointIndex + 1) % waypoints.Length;
