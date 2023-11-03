@@ -35,7 +35,6 @@ public class RobotManager : MonoBehaviour
     [Range(0, maxAlert)] 
     public float alertLevel;
 
-    //parametrs for raycasting, detecting objects
 
     [Header("visioncone settings")]
     //parameters for drawing vision cone
@@ -58,11 +57,6 @@ public class RobotManager : MonoBehaviour
     [HideInInspector]
     public Collider targetRef;
     
-
-   
-
-    
-
     //variables for getting hit with stun
     [Header("stun settings")]
     [SerializeField]
@@ -72,20 +66,29 @@ public class RobotManager : MonoBehaviour
     
     [Header("AI pathfinding")]
     //For the waypoint
-    public Transform[] waypoints;
-    int m_CurrentWaypointIndex;
-    public float alertVel;
-    public float intrigueVel;
-    public bool wasChasing;
-
+    public Transform[] routinePoints;
+    [HideInInspector]
+    public Vector3[] patrolPoints;
+    [HideInInspector]
+    public bool searching = false;
+    private int m_CurrentWaypointIndex;
+    [SerializeField]
+    private float alertVel;
+    [SerializeField]
+    private float intrigueVel;
+    [SerializeField]
+    private float patrolVel;
+    [HideInInspector]
+    public bool playerWasLost;
+    private int waypointIndex;
     //moving AI bits
     public NavMeshAgent agent;
     private Vector3 player;
 
     private void Start()
     {
-        if(waypoints.Length>0)
-        agent.SetDestination(waypoints[0].position);
+        if(routinePoints.Length>0)
+        agent.SetDestination(routinePoints[0].position);
     }
 
     private void Awake()
@@ -111,13 +114,13 @@ public class RobotManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(agent.isStopped+" "+agent.hasPath);
+        //Debug.Log("destination " +agent.destination+"wayppointindex "+m_CurrentWaypointIndex+"dist left"+ agent.remainingDistance);
     }
 
     private void LateUpdate()
     {
 
-       
+      //here for playtesting remove later
         if (visioncone)
         {
             drawFOV();
@@ -138,7 +141,7 @@ public class RobotManager : MonoBehaviour
             yield return wait;
             FOVCheck();
             UpdateAlertstate(playerInFOV);
-            moveTo();
+            chasePlayer();
         }
     }
 
@@ -151,8 +154,7 @@ public class RobotManager : MonoBehaviour
                 initialRadius = visionRadius;
                 visionRadius = 0;
 
-               agent.ResetPath();
-               // agent.isStopped = true;
+                agent.ResetPath();
                 agent.velocity = Vector3.zero;
                 isStunned = true;
 
@@ -225,7 +227,7 @@ public class RobotManager : MonoBehaviour
                 break;
 
             case AlertStage.IntriguedL1:
-                wasChasing = false;
+                playerWasLost = false;
                 if (playerinFOV)
                 {
                     alertLevel += alertSpeed;
@@ -258,7 +260,7 @@ public class RobotManager : MonoBehaviour
                     alertLevel -= forgetSpeed;
                     if (alertLevel <= 0)
                     {
-                        wasChasing = true;
+                        playerWasLost = true;
                         alertStage = AlertStage.IntriguedL1;
                     }
                 }
@@ -276,30 +278,77 @@ public class RobotManager : MonoBehaviour
         }
     }
     
-    private void moveTo()
+    private void chasePlayer()
     {
-        int LastDestinationIndex = m_CurrentWaypointIndex;
         if (!isStunned)
         {
-            if (alertStage == AlertStage.Alerted)
+            switch (alertStage)
             {
-                agent.speed = alertVel;
-                player = targetRef.transform.position;
-                agent.SetDestination(player);
-            }
-            else if (alertStage == AlertStage.IntriguedL2 && !isStunned)
-            {
-                agent.speed = intrigueVel;
-                player = targetRef.transform.position;
-                agent.SetDestination(player);
-            }
-            else if (alertStage == AlertStage.Peaceful && waypoints.Length != 0)
-            
-            if (agent.remainingDistance < agent.stoppingDistance)
-            {
-                m_CurrentWaypointIndex = (m_CurrentWaypointIndex + 1) % waypoints.Length;
-                agent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
-            }
+                case AlertStage.Alerted:
+                    agent.speed = alertVel;
+                    player = targetRef.transform.position;
+                    agent.SetDestination(player);
+                    break;
+
+                case AlertStage.IntriguedL2:
+                    agent.speed = intrigueVel;
+                    player = targetRef.transform.position;
+                    agent.SetDestination(player);
+                    break;
+
+                case AlertStage.IntriguedL1:
+                    if (!searching)
+                    {
+                        agent.speed = patrolVel;
+                        regularPatrol();
+                    }
+                    else
+                    {
+                        agent.speed = intrigueVel;
+                        searchPatrol();
+                    }
+                    break;
+
+                case AlertStage.Peaceful:
+                    if (!searching)
+                    {
+                        Debug.Log("weiner");
+                        agent.speed = patrolVel;
+                        regularPatrol();
+                    }
+                    else
+                    {
+                        agent.speed = intrigueVel;
+                        searchPatrol();
+                    }
+                    break;
+            }         
+        }
+    }
+
+    private void regularPatrol()
+    {
+        if (agent.remainingDistance < agent.stoppingDistance && routinePoints.Length > 0)
+        {
+            m_CurrentWaypointIndex = (m_CurrentWaypointIndex + 1) % routinePoints.Length;
+            agent.SetDestination(routinePoints[m_CurrentWaypointIndex].position);
+        }
+    }
+
+    private void searchPatrol()
+    {
+
+        if (agent.remainingDistance < agent.stoppingDistance && waypointIndex < patrolPoints.Length - 1)
+        {
+            waypointIndex++;
+            agent.SetDestination(patrolPoints[waypointIndex]);
+        }
+
+        if(waypointIndex == patrolPoints.Length - 1)
+        {
+            searching = false;
+            waypointIndex = 0;
+            agent.SetDestination(routinePoints[0].position);
         }
     }
    

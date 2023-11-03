@@ -17,13 +17,12 @@ public class patrol : MonoBehaviour
     }
     private void Update()
     {
-        
-        
-        if (robot.wasChasing)
+        if (robot.playerWasLost)
         {
-            idkman = patrolPoints();
+            robot.patrolPoints = patrolPoints();
+            idkman = robot.patrolPoints;
+            robot.searching = true;
             showPoints = true;
-
         }
 
         if (showPoints)
@@ -32,7 +31,7 @@ public class patrol : MonoBehaviour
             {
                 
                 Debug.DrawRay(idkman[i], Vector3.up*2, Color.red);
-                Debug.Log(idkman[i]+" "+i);
+               // Debug.Log(idkman[i]+" "+i);
             }
         }
     }
@@ -51,9 +50,15 @@ public class patrol : MonoBehaviour
                 if (NavMesh.SamplePosition(pointProposal, out hit, 1.84f*2f, NavMesh.AllAreas) && arrayIndex < pointAmount+1)
                 {
                     patrolPoints[arrayIndex] = hit.position;
-                    Debug.Log("success " + hit.position + " " + arrayIndex+" "+patrolPoints.Length);
+                //Debug.Log("success " + hit.position + " " + arrayIndex+" "+patrolPoints.Length);
+                Debug.Log("success");
                     arrayIndex++;
                 }
+            else
+                {
+                    Debug.Log("fail");
+                }
+                    
             }
         
         return patrolPoints;

@@ -367,7 +367,6 @@
 "Assets/Scripts/EnemyStun.cs"
 "Assets/Scripts/grenadeController.cs"
 "Assets/Scripts/ItemPickUp.cs"
-"Assets/Scripts/ItemPickUp_Disapear.cs"
 "Assets/Scripts/ItemPickUp_Dissapear.cs"
 "Assets/Scripts/magicTank.cs"
 "Assets/Scripts/patrol.cs"
@@ -377,7 +376,6 @@
 "Assets/Scripts/Powerups.cs"
 "Assets/Scripts/RobotManager.cs"
 "Assets/Scripts/UIController.cs"
-"Assets/Scripts/viewCone.cs"
 "Assets/viewConeColor.cs"
 -langversion:9.0
 

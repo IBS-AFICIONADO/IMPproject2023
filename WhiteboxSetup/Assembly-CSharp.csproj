@@ -67,10 +67,8 @@
     <Compile Include="Assets\Scripts\PickUp.cs" />
     <Compile Include="Assets\Scripts\UIController.cs" />
     <Compile Include="Assets\Scripts\magicTank.cs" />
-    <Compile Include="Assets\Scripts\viewCone.cs" />
     <Compile Include="Assets\Scripts\Powerups.cs" />
     <Compile Include="Assets\Scripts\patrol.cs" />
-    <Compile Include="Assets\Scripts\ItemPickUp_Disapear.cs" />
     <Compile Include="Assets\Scripts\ItemPickUp.cs" />
     <Compile Include="Assets\viewConeColor.cs" />
     <Compile Include="Assets\Scripts\playerMovement.cs" />

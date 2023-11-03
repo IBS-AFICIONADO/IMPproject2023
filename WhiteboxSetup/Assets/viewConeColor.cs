@@ -19,18 +19,23 @@ public class viewConeColor : MonoBehaviour
         Color yellow = new Color(1, 0.92f, 0.016f, 0.5f);
         Color red = new Color(1, 0, 0, 0.5f);
         Color green = new Color(0, 1, 0, 0.5f);
-        if(manager.alertStage == AlertStage.Peaceful)
+
+        switch(manager.alertStage)
         {
-            c = green;
+            case AlertStage.Peaceful:
+                c = green;
+                break;
+            case AlertStage.IntriguedL1:
+                c = Color.Lerp(yellow, red, manager.alertLevel / manager.maxAlertEdit);
+                break;
+            case AlertStage.IntriguedL2:
+                c = Color.Lerp(yellow, red, manager.alertLevel / manager.maxAlertEdit);
+                break;
+            case AlertStage.Alerted:
+                c = red;
+                break;
         }
-        else if (manager.alertStage == AlertStage.IntriguedL1 || manager.alertStage == AlertStage.IntriguedL2)
-        {
-            c = Color.Lerp(yellow, red, manager.alertLevel / manager.maxAlertEdit);
-        }
-        else if (manager.alertStage == AlertStage.Alerted)
-        {
-            c = red;
-        }
+
         meshRenderer.material.SetColor("_Color", c);
     }
 }
