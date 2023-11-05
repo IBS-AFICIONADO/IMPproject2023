@@ -69,6 +69,8 @@
     <Compile Include="Assets\Scripts\EnemyStun.cs" />
     <Compile Include="Assets\Scripts\PickUp.cs" />
     <Compile Include="Assets\Scripts\UIController.cs" />
+    <Compile Include="Assets\GameOverScreen.cs" />
+    <Compile Include="Assets\Scripts\RetryGame.cs" />
     <Compile Include="Assets\Scripts\ItemPickUp.cs" />
     <Compile Include="Assets\Scripts\playerMovement.cs" />
   </ItemGroup>

@@ -31,8 +31,8 @@ public class playerMovement : MonoBehaviour
         playerRB = GetComponent<Rigidbody>();
         playerRB.freezeRotation = true;
         playerHeight = GetComponent<CapsuleCollider>().height;
-       
-    
+   
+        
     }
 
     // Update is called once per frame
