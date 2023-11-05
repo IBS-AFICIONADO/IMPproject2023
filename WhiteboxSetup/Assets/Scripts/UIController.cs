@@ -10,6 +10,7 @@ public class UIController : MonoBehaviour
     private Image chargeIndicator = null;
     private bool shouldUpdate;
     public float fill;
+    public magicTank magicTank;
     private void Start()
     {
         
@@ -17,8 +18,7 @@ public class UIController : MonoBehaviour
 
     private void Update()
     {
-        fill = GameObject.Find("Player").GetComponent<playerController>().invisibleTimer;
-        if (GameObject.Find("Player").GetComponent<playerController>().invisibleTimer < 100)
+        if (magicTank.magicMeter < 100)
         {
             chargeIndicator.fillAmount = fill / 100;
         }

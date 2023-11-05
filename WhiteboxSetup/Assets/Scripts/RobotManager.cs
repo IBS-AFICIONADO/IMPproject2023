@@ -7,34 +7,36 @@ using UnityEngine.AI;
 public enum AlertStage
 {
     Peaceful,
-    Intrigued,
+    IntriguedL1,
+    IntriguedL2,
     Alerted
 
 }
 
 public class RobotManager : MonoBehaviour
 {
+    [Header("vision and hearing")]
     //parameters vision
     public float visionRadius;
     [Range(0, 360)] public float fovAngle;
-
+    //hearing + powerup stuff
+    public float hearingRadius;
     //parameters before enum change
     const float maxAlert = 100f;
-    public float alertSpeed;
-    public float forgetSpeed;
-
-    public bool visioncone;
-
-
-    public AlertStage alertStage;
-    [Range(0, maxAlert)] public float alertLevel;
-
-    //parametrs for raycasting, detecting objects
     [SerializeField]
     private LayerMask targetMask;
     [SerializeField]
     private LayerMask obstructionMask;
 
+    [Header("alerting and forgetting")]
+    public float alertSpeed;
+    public float forgetSpeed;
+    public AlertStage alertStage;
+    [Range(0, maxAlert)] 
+    public float alertLevel;
+
+
+    [Header("visioncone settings")]
     //parameters for drawing vision cone
     [SerializeField]
     private float meshResolution;
@@ -45,6 +47,7 @@ public class RobotManager : MonoBehaviour
     private int edgeDetectIte;
     [SerializeField]
     private float edgeDistThreshold;
+    public bool visioncone;
 
     //parameters needed in the editor but not important for changing in unity inspector
     [HideInInspector]
@@ -54,28 +57,38 @@ public class RobotManager : MonoBehaviour
     [HideInInspector]
     public Collider targetRef;
     
-
-    //moving AI bits
-    NavMeshAgent agent;
-    private Vector3 player;
-
-    //hearing + powerup stuff
-    public float hearingRadius;
-
     //variables for getting hit with stun
+    [Header("stun settings")]
     [SerializeField]
     private float stunTime;
     private bool isStunned;
     private float initialRadius;
-
+    
+    [Header("AI pathfinding")]
     //For the waypoint
-    public Transform[] waypoints;
-    int m_CurrentWaypointIndex;
+    public Transform[] routinePoints;
+    [HideInInspector]
+    public Vector3[] patrolPoints;
+    [HideInInspector]
+    public bool searching = false;
+    private int m_CurrentWaypointIndex;
+    [SerializeField]
+    private float alertVel;
+    [SerializeField]
+    private float intrigueVel;
+    [SerializeField]
+    private float patrolVel;
+    [HideInInspector]
+    public bool playerWasLost;
+    private int waypointIndex;
+    //moving AI bits
+    public NavMeshAgent agent;
+    private Vector3 player;
 
     private void Start()
     {
-        if(waypoints.Length>0)
-        agent.SetDestination(waypoints[0].position);
+        if(routinePoints.Length>0)
+        agent.SetDestination(routinePoints[0].position);
     }
 
     private void Awake()
@@ -101,13 +114,13 @@ public class RobotManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(agent.isStopped+" "+agent.hasPath);
+        //Debug.Log("destination " +agent.destination+"wayppointindex "+m_CurrentWaypointIndex+"dist left"+ agent.remainingDistance);
     }
 
     private void LateUpdate()
     {
 
-       
+      //here for playtesting remove later
         if (visioncone)
         {
             drawFOV();
@@ -128,7 +141,7 @@ public class RobotManager : MonoBehaviour
             yield return wait;
             FOVCheck();
             UpdateAlertstate(playerInFOV);
-            moveTo();
+            chasePlayer();
         }
     }
 
@@ -141,8 +154,7 @@ public class RobotManager : MonoBehaviour
                 initialRadius = visionRadius;
                 visionRadius = 0;
 
-               agent.ResetPath();
-               // agent.isStopped = true;
+                agent.ResetPath();
                 agent.velocity = Vector3.zero;
                 isStunned = true;
 
@@ -204,17 +216,37 @@ public class RobotManager : MonoBehaviour
 
   
 
-    private void UpdateAlertstate(bool playerinFOV)
+    public void UpdateAlertstate(bool playerinFOV)
     {
         switch (alertStage)
         {
             case AlertStage.Peaceful:
                 alertLevel = 0;
                 if (playerinFOV)
-                    alertStage = AlertStage.Intrigued;
+                    alertStage = AlertStage.IntriguedL1;
                 break;
 
-            case AlertStage.Intrigued:
+            case AlertStage.IntriguedL1:
+                playerWasLost = false;
+                if (playerinFOV)
+                {
+                    alertLevel += alertSpeed;
+                    if (alertLevel >= maxAlert/4)
+                    {
+                        alertStage = AlertStage.IntriguedL2;
+                    }
+                }
+                else
+                {
+                    alertLevel -= forgetSpeed;
+                    if (alertLevel <= 0)
+                    {
+                        alertStage = AlertStage.Peaceful;
+                    }
+                }
+                break;
+
+            case AlertStage.IntriguedL2:
                 if (playerinFOV)
                 {
                     alertLevel += alertSpeed;
@@ -228,8 +260,8 @@ public class RobotManager : MonoBehaviour
                     alertLevel -= forgetSpeed;
                     if (alertLevel <= 0)
                     {
-                        //agent.SetDestination((waypoints[m_CurrentWaypointIndex].position));
-                        alertStage = AlertStage.Peaceful;
+                        playerWasLost = true;
+                        alertStage = AlertStage.IntriguedL1;
                     }
                 }
                 break;
@@ -237,7 +269,7 @@ public class RobotManager : MonoBehaviour
             case AlertStage.Alerted:
                 if (!playerinFOV)
                 {
-                    alertStage = AlertStage.Intrigued;
+                    alertStage = AlertStage.IntriguedL2;
                 }
                 else
                     alertLevel = 100;
@@ -246,28 +278,77 @@ public class RobotManager : MonoBehaviour
         }
     }
     
-    private void moveTo()
+    private void chasePlayer()
     {
-        int LastDestinationIndex = m_CurrentWaypointIndex;
         if (!isStunned)
         {
-            if (alertStage == AlertStage.Alerted)
+            switch (alertStage)
             {
-                player = targetRef.transform.position;
-                agent.SetDestination(player);
-            }
-            else if (alertStage == AlertStage.Intrigued && !isStunned)
-            {
-                player = targetRef.transform.position;
-                agent.SetDestination(player);
-            }
-            else if (alertStage == AlertStage.Peaceful)
+                case AlertStage.Alerted:
+                    agent.speed = alertVel;
+                    player = targetRef.transform.position;
+                    agent.SetDestination(player);
+                    break;
 
-                if (agent.remainingDistance < agent.stoppingDistance)
-                {
-                    m_CurrentWaypointIndex = (m_CurrentWaypointIndex + 1) % waypoints.Length;
-                    agent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
-                }
+                case AlertStage.IntriguedL2:
+                    agent.speed = intrigueVel;
+                    player = targetRef.transform.position;
+                    agent.SetDestination(player);
+                    break;
+
+                case AlertStage.IntriguedL1:
+                    if (!searching)
+                    {
+                        agent.speed = patrolVel;
+                        regularPatrol();
+                    }
+                    else
+                    {
+                        agent.speed = intrigueVel;
+                        searchPatrol();
+                    }
+                    break;
+
+                case AlertStage.Peaceful:
+                    if (!searching)
+                    {
+                        Debug.Log("weiner");
+                        agent.speed = patrolVel;
+                        regularPatrol();
+                    }
+                    else
+                    {
+                        agent.speed = intrigueVel;
+                        searchPatrol();
+                    }
+                    break;
+            }         
+        }
+    }
+
+    private void regularPatrol()
+    {
+        if (agent.remainingDistance < agent.stoppingDistance && routinePoints.Length > 0)
+        {
+            m_CurrentWaypointIndex = (m_CurrentWaypointIndex + 1) % routinePoints.Length;
+            agent.SetDestination(routinePoints[m_CurrentWaypointIndex].position);
+        }
+    }
+
+    private void searchPatrol()
+    {
+
+        if (agent.remainingDistance < agent.stoppingDistance && waypointIndex < patrolPoints.Length - 1)
+        {
+            waypointIndex++;
+            agent.SetDestination(patrolPoints[waypointIndex]);
+        }
+
+        if(waypointIndex == patrolPoints.Length - 1)
+        {
+            searching = false;
+            waypointIndex = 0;
+            agent.SetDestination(routinePoints[0].position);
         }
     }
    
@@ -282,7 +363,7 @@ public class RobotManager : MonoBehaviour
         ViewCastInfo oldCast = new ViewCastInfo();
         for (int i = 0; i <= stepCount; i++){
             float angle = transform.eulerAngles.y - fovAngle / 2 + stepAngleSize*i ;
-            //every iteration see what viewcast returns for the fiven segment of the mesh
+            //every iteration see what viewcast returns for the given segment of the mesh
             ViewCastInfo newViewCast = ViewCast(angle);
             if (i > 0)
             {
@@ -324,7 +405,6 @@ public class RobotManager : MonoBehaviour
             }
         }
         viewMesh.Clear();
-
         viewMesh.vertices = vertices;
         viewMesh.triangles = triangles;
         viewMesh.RecalculateNormals();
