@@ -503,6 +503,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 057a40d6fdcee2f48bf316042ffd0225, type: 2}
+  - {fileID: 2100000, guid: 4193789e20b04b34ca2075caa4c1ac5a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -699,14 +700,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ec24e3c42d04e48bb2087c85c44b09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerObject: {fileID: 1326085209165253175}
-  playerBody: {fileID: 1326085208917977193}
-  invisDeplete: 0
-  invisCharge: 0
-  invisibleTimer: 100
-  materials:
-  - {fileID: 2100000, guid: 057a40d6fdcee2f48bf316042ffd0225, type: 2}
-  - {fileID: 2100000, guid: 8b7f7a2300afdf542900cadff0fb454a, type: 2}
+  magicDeplete: 0
+  magicCharge: 0
+  magicMeter: 0
+  cooldown: 0
+  deplete: 0
 --- !u!54 &2568989549200963807
 Rigidbody:
   m_ObjectHideFlags: 0

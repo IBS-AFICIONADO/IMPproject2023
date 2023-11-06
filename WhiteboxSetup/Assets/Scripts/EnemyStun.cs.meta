@@ -3,11 +3,7 @@ guid: 5408fab79c962a94f9f3116231d0fb24
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - stunGrenade: {fileID: 5844798309994836386, guid: 74c3d6337bd6bfb40b9a111fcf8bedea, type: 3}
-  - cam: {instanceID: 0}
-  - LineRenderer: {instanceID: 0}
-  - releasePosition: {instanceID: 0}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

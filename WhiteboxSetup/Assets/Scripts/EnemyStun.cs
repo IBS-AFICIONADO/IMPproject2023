@@ -12,9 +12,9 @@ public class EnemyStun : MonoBehaviour
     private GameObject projectile;
     private Rigidbody projectileRB;
 
-    private bool available = true;
+    public bool available = true;
     [SerializeField]
-    private LineRenderer LineRenderer;
+    public LineRenderer LineRenderer;
     [SerializeField]
     private Transform releasePosition;
     [SerializeField]
@@ -35,24 +35,8 @@ public class EnemyStun : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
 
-        if (Input.GetMouseButton(1))
-        {
-
-            holdProjectile();
-            drawProjection();
-            available = false;
-        }
-        if (Input.GetMouseButtonUp(1))
-        {
-            LineRenderer.enabled = false;
-            throwProjectile();
-        }
-    }
-
-    private void throwProjectile()
+    public void throwProjectile()
     {
         available = true;
         projectileRB.velocity = Vector3.zero;
@@ -65,7 +49,7 @@ public class EnemyStun : MonoBehaviour
         projectileRB.AddForce(cam.transform.forward * throwForce + upforce * transform.up, ForceMode.Impulse);
     }
 
-    private void holdProjectile()
+    public void holdProjectile()
     {
 
         if (available)
@@ -76,7 +60,7 @@ public class EnemyStun : MonoBehaviour
         }
     }
 
-    private void drawProjection()
+    public void drawProjection()
     {
         LineRenderer.enabled = true;
         LineRenderer.positionCount = Mathf.CeilToInt(LinePoints / timeBetweenpoints) + 1;
@@ -93,10 +77,7 @@ public class EnemyStun : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        
-    }
+
 }
 
 

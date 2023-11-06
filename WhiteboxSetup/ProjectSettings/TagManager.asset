@@ -9,6 +9,7 @@ TagManager:
   - Invisible
   - Robot
   - Object
+  - Die
   layers:
   - Default
   - TransparentFX

@@ -22,7 +22,7 @@ public class playerMovement : MonoBehaviour
     private Rigidbody playerRB;
 
     private float playerHeight;
-    private  bool grounded;
+    private bool grounded;
     private bool playerInput;
 
     // Start is called before the first frame update
@@ -31,8 +31,8 @@ public class playerMovement : MonoBehaviour
         playerRB = GetComponent<Rigidbody>();
         playerRB.freezeRotation = true;
         playerHeight = GetComponent<CapsuleCollider>().height;
-   
-        
+
+
     }
 
     // Update is called once per frame
@@ -49,11 +49,11 @@ public class playerMovement : MonoBehaviour
         move();
     }
 
-   
+
 
     private void input()
     {
-        playerInput = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A)|| Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
+        playerInput = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
     }
@@ -89,8 +89,8 @@ public class playerMovement : MonoBehaviour
             Ray downRay = new Ray(transform.position, Vector3.down);
             if (Physics.Raycast(downRay, out hit))
             {
-                float distanceToGround =  hit.distance - playerHeight * 0.5f;
-                float pushDown = distanceToGround * groundingForce * 10 - playerRB.velocity.y *.5f ;
+                float distanceToGround = hit.distance - playerHeight * 0.5f;
+                float pushDown = distanceToGround * groundingForce * 10 - playerRB.velocity.y * .5f;
                 playerRB.AddForce(pushDown * Vector3.down);
             }
         }

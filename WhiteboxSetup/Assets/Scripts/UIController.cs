@@ -11,10 +11,6 @@ public class UIController : MonoBehaviour
     private bool shouldUpdate;
     public float fill;
     public magicTank magicTank;
-    private void Start()
-    {
-        
-    }
 
     private void Update()
     {
