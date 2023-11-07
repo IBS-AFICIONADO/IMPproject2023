@@ -113,7 +113,7 @@ public class RobotManager : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log("destination " +agent.destination+"wayppointindex "+m_CurrentWaypointIndex+"dist left"+ agent.remainingDistance);
+        Debug.Log(playerInFOV);
     }
 
     private void LateUpdate()
@@ -187,7 +187,6 @@ public class RobotManager : MonoBehaviour
             {
                 if (c.CompareTag("Player"))
                 {
-                    //Debug.Log("something is here");
 
                     //calculate direction between enemy and player
                     Vector3 directionToTarget = (c.transform.position - transform.position).normalized;

@@ -8,8 +8,6 @@ public class UIController : MonoBehaviour
 {
     [SerializeField]
     private Image chargeIndicator = null;
-    private bool shouldUpdate;
-    public float fill;
     public magicTank magicTank;
     private void Start()
     {
@@ -19,8 +17,8 @@ public class UIController : MonoBehaviour
     private void Update()
     {
         if (magicTank.magicMeter < 100)
-        {
-            chargeIndicator.fillAmount = fill / 100;
+        { 
+            chargeIndicator.fillAmount = magicTank.magicMeter / 100;
         }
     }
 }

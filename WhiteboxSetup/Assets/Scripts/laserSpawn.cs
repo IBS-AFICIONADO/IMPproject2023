@@ -59,12 +59,12 @@ public class laserSpawn : MonoBehaviour
                 {
                     charging.Play(true);
                 }
-                particleMain.simulationSpeed = Mathf.Lerp(1f, 5f, manager.alertLevel / manager.maxAlertEdit);
+                particleMain.simulationSpeed = Mathf.Lerp(0, 5f, manager.alertLevel / manager.maxAlertEdit);
                 break;
 
             case AlertStage.IntriguedL2 when manager.playerInFOV:
                 renderLaser(LaserWidth / 2, laserMaterials[0], false);
-                particleMain.simulationSpeed = Mathf.Lerp(1f, 5f, manager.alertLevel / manager.maxAlertEdit);
+                particleMain.simulationSpeed = Mathf.Lerp(0, 5f, manager.alertLevel / manager.maxAlertEdit);
                 break;
 
             case AlertStage.Alerted when !available && manager.playerInFOV:

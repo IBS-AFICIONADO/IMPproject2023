@@ -43,6 +43,7 @@ public class magicTank : MonoBehaviour
     {
         WaitForSeconds cooldownTime = new WaitForSeconds(3f);
         yield return null;
+        yield return null;
         cooldown = true;
         yield return cooldownTime;
         cooldown = false;

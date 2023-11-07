@@ -858,17 +858,17 @@
       <Project>{68364BE4-CA43-5543-F808-CFB2F8B05FCE}</Project>
       <Name>com.unity.cinemachine.editor</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.AI.Navigation.csproj">
-      <Project>{34E4BF3C-BF58-F2B7-5602-4E13D4A13549}</Project>
-      <Name>Unity.AI.Navigation</Name>
+    <ProjectReference Include="Unity.Postprocessing.Runtime.csproj">
+      <Project>{8EA629A1-4109-F1DC-3172-43FBD6D9E580}</Project>
+      <Name>Unity.Postprocessing.Runtime</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.PlasticSCM.Editor.csproj">
       <Project>{8A3AD225-50DF-DABE-C03A-0E6EBB899AFF}</Project>
       <Name>Unity.PlasticSCM.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.Postprocessing.Runtime.csproj">
-      <Project>{8EA629A1-4109-F1DC-3172-43FBD6D9E580}</Project>
-      <Name>Unity.Postprocessing.Runtime</Name>
+    <ProjectReference Include="Unity.AI.Navigation.csproj">
+      <Project>{34E4BF3C-BF58-F2B7-5602-4E13D4A13549}</Project>
+      <Name>Unity.AI.Navigation</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.ProBuilder.csproj">
       <Project>{CE200C1A-EC95-8168-4F43-D03E2215A807}</Project>
@@ -942,10 +942,6 @@
       <Project>{C3951BEB-27D9-AB89-CF5E-606AF2167EB2}</Project>
       <Name>Unity.Performance.Profile-Analyzer.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.TestTools.CodeCoverage.Editor.csproj">
-      <Project>{1CFA032B-E814-C62A-B809-DBB7BCA96C2C}</Project>
-      <Name>Unity.TestTools.CodeCoverage.Editor</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.csproj">
       <Project>{9E9B333B-60CA-5A1D-6F6E-012031EA4798}</Project>
       <Name>Unity.TestTools.CodeCoverage.Editor.OpenCover.Model</Name>
@@ -954,13 +950,17 @@
       <Project>{A0868CD0-3C96-D86F-6726-2854A52FACF8}</Project>
       <Name>Unity.AI.Navigation.Updater</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.VisualScripting.State.Editor.csproj">
-      <Project>{4603E549-C82E-E816-F1A6-519634BC0261}</Project>
-      <Name>Unity.VisualScripting.State.Editor</Name>
+    <ProjectReference Include="Unity.TestTools.CodeCoverage.Editor.csproj">
+      <Project>{1CFA032B-E814-C62A-B809-DBB7BCA96C2C}</Project>
+      <Name>Unity.TestTools.CodeCoverage.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Postprocessing.Editor.csproj">
       <Project>{05277F3E-A7FF-509D-E904-797EEB6A36BB}</Project>
       <Name>Unity.Postprocessing.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.VisualScripting.State.Editor.csproj">
+      <Project>{4603E549-C82E-E816-F1A6-519634BC0261}</Project>
+      <Name>Unity.VisualScripting.State.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.TextMeshPro.csproj">
       <Project>{81336A18-4867-1E9A-323F-382C63DBB8D3}</Project>

@@ -29,6 +29,8 @@ public class Powerups : MonoBehaviour
         else
         {
             magicTank.deplete = false;
+            int visLayer = LayerMask.NameToLayer("target");
+            playerObject.layer = visLayer;
             playerObject.tag = "Player";
             playerBody.GetComponent<MeshRenderer>().material = materials[0];
         }
@@ -37,6 +39,8 @@ public class Powerups : MonoBehaviour
     {
         if (magicTank.magicMeter > 0)
         playerObject.tag = "Invisible";
+        int invislayer = LayerMask.NameToLayer("Ignore Raycast");
+        playerObject.layer = invislayer;
         playerBody.GetComponent<MeshRenderer>().material = materials[1];
 
 
