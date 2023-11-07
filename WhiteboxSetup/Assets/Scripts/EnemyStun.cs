@@ -16,16 +16,11 @@ public class EnemyStun : MonoBehaviour
     [SerializeField]
     public LineRenderer LineRenderer;
     [SerializeField]
-    private Transform releasePosition;
-    [SerializeField]
     [Range(10, 100)]
     private int LinePoints;
     [SerializeField]
     [Range(0.01f, 0.25f)]
     private float timeBetweenpoints;
-    private Transform curveStart;
-    private Transform curveControl;
-    private Transform curveEnd;
     public float upforce;
     // Start is called before the first frame update
     void Awake()
@@ -54,7 +49,7 @@ public class EnemyStun : MonoBehaviour
 
         if (available)
         {
-            projectile = Instantiate(stunGrenade, releasePosition.transform);
+            projectile = Instantiate(stunGrenade, transform);
             projectileRB = projectile.GetComponent<Rigidbody>();
             projectileRB.constraints = RigidbodyConstraints.FreezeAll;
         }
@@ -64,7 +59,7 @@ public class EnemyStun : MonoBehaviour
     {
         LineRenderer.enabled = true;
         LineRenderer.positionCount = Mathf.CeilToInt(LinePoints / timeBetweenpoints) + 1;
-        Vector3 startPosition = releasePosition.position;
+        Vector3 startPosition = transform.position;
         Vector3 startVelocity = throwForce * cam.transform.forward + upforce * transform.up / projectileRB.mass;
         int i = 0;
         LineRenderer.SetPosition(i, startPosition);
@@ -76,7 +71,6 @@ public class EnemyStun : MonoBehaviour
             LineRenderer.SetPosition(i, point);
         }
     }
-
 
 }
 

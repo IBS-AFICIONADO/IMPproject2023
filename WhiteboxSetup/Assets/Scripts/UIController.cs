@@ -13,7 +13,7 @@ public class UIController : MonoBehaviour
     private void Update()
     {
         if (magicTank.magicMeter < 100)
-        {
+        { 
             chargeIndicator.fillAmount = magicTank.magicMeter / 100;
         }
     }

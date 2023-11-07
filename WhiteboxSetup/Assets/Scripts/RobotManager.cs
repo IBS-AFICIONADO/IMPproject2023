@@ -25,8 +25,7 @@ public class RobotManager : MonoBehaviour
     const float maxAlert = 100f;
     [SerializeField]
     private LayerMask targetMask;
-    [SerializeField]
-    private LayerMask obstructionMask;
+    public LayerMask obstructionMask;
 
     [Header("alerting and forgetting")]
     public float alertSpeed;
@@ -115,7 +114,7 @@ public class RobotManager : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log("destination " +agent.destination+"wayppointindex "+m_CurrentWaypointIndex+"dist left"+ agent.remainingDistance);
+        Debug.Log(playerInFOV);
     }
 
     private void LateUpdate()
@@ -189,12 +188,11 @@ public class RobotManager : MonoBehaviour
             {
                 if (c.CompareTag("Player"))
                 {
-                    //Debug.Log("something is here");
 
                     //calculate direction between enemy and player
                     Vector3 directionToTarget = (c.transform.position - transform.position).normalized;
 
-                    //angle returns the smallest angle between two vectors sp fovAngle has to be halved
+                    //angle returns the smallest angle between two vectors so fovAngle has to be halved
                     if (Vector3.Angle(transform.forward, directionToTarget) < fovAngle / 2)
                     {
                         float distanceToTarget = Vector3.Distance(transform.position, c.transform.position);
@@ -412,7 +410,7 @@ public class RobotManager : MonoBehaviour
     }
 
 
-    //method that takes an angle in degrees between target  and converts it to a vector3 which goes from parent transform 
+    //method that takes an angle in degrees between target  and origin converts it to a vector3 
     public Vector3 DirFromAngle(float angleInDeg, bool isGlobal)
     {
         if (!isGlobal)
