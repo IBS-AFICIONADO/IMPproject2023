@@ -62,6 +62,7 @@
     <Compile Include="Assets\Scripts\playerCam.cs" />
     <Compile Include="Assets\Scripts\grenadeController.cs" />
     <Compile Include="Assets\Scripts\RobotManager.cs" />
+    <Compile Include="Assets\Scripts\playerController.cs" />
     <Compile Include="Assets\Scripts\EnemyStun.cs" />
     <Compile Include="Assets\Scripts\ItemPickUp_Dissapear.cs" />
     <Compile Include="Assets\Scripts\laserSpawn.cs" />
@@ -70,6 +71,8 @@
     <Compile Include="Assets\Scripts\magicTank.cs" />
     <Compile Include="Assets\Scripts\Powerups.cs" />
     <Compile Include="Assets\Scripts\patrol.cs" />
+    <Compile Include="Assets\GameOverScreen.cs" />
+    <Compile Include="Assets\Scripts\RetryGame.cs" />
     <Compile Include="Assets\Scripts\ItemPickUp.cs" />
     <Compile Include="Assets\viewConeColor.cs" />
     <Compile Include="Assets\Scripts\playerMovement.cs" />
