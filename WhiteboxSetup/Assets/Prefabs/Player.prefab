@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 307441939}
   - component: {fileID: 307441940}
-  - component: {fileID: 5724280625202265860}
+  - component: {fileID: 8081207517474431947}
   m_Layer: 0
   m_Name: grenadehand
   m_TagString: Untagged
@@ -48,12 +48,12 @@ MonoBehaviour:
   stunGrenade: {fileID: 5844798309994836386, guid: 74c3d6337bd6bfb40b9a111fcf8bedea, type: 3}
   throwForce: 10
   cam: {fileID: 0}
-  LineRenderer: {fileID: 5724280625202265860}
+  LineRenderer: {fileID: 0}
   releasePosition: {fileID: 307441939}
   LinePoints: 100
   timeBetweenpoints: 0.079
-  upforce: 5
---- !u!120 &5724280625202265860
+  upforce: 10
+--- !u!120 &8081207517474431947
 LineRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
@@ -156,7 +156,7 @@ LineRenderer:
   m_MaskInteraction: 0
   m_UseWorldSpace: 1
   m_Loop: 0
-  m_ApplyActiveColorSpace: 1
+  m_ApplyActiveColorSpace: 0
 --- !u!1 &1326085208296583740
 GameObject:
   m_ObjectHideFlags: 0
@@ -619,7 +619,7 @@ GameObject:
   - component: {fileID: 5657645675396090803}
   - component: {fileID: 278371286}
   - component: {fileID: 931229228620792232}
-  - component: {fileID: 2568989549200963807}
+  - component: {fileID: 1484690083629228068}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -699,15 +699,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ec24e3c42d04e48bb2087c85c44b09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerObject: {fileID: 1326085209165253175}
-  playerBody: {fileID: 1326085208917977193}
-  invisDeplete: 0
-  invisCharge: 0
-  invisibleTimer: 100
-  materials:
-  - {fileID: 2100000, guid: 057a40d6fdcee2f48bf316042ffd0225, type: 2}
-  - {fileID: 2100000, guid: 8b7f7a2300afdf542900cadff0fb454a, type: 2}
---- !u!54 &2568989549200963807
+  magicDeplete: 0
+  magicCharge: 0
+  magicMeter: 0
+  cooldown: 0
+  deplete: 0
+--- !u!54 &1484690083629228068
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
