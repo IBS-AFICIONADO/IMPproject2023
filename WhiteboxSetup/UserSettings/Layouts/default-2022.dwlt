@@ -121,7 +121,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 50}
   m_MaxSize: {x: 32384, y: 8096}
   vertical: 0
-  controlID: 110
+  controlID: 60
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -369,7 +369,8 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SkipHidden: 0
     m_SearchArea: 1
-    m_Folders: []
+    m_Folders:
+    - Assets/Scripts
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -410,7 +411,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 296}
+    scrollPos: {x: 0, y: 288.50122}
     m_SelectedIDs: 
     m_LastClickedID: 0
     m_ExpandedIDs: ffffffff00000000f4640000f6640000f8640000fa640000fc640000fe6400000065000002650000046500000665000008650000
@@ -825,9 +826,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -7.9386024, y: -14.598293, z: 11.086639}
+    m_Target: {x: -18.129759, y: 1.9072078, z: -9.370148}
     speed: 2
-    m_Value: {x: -7.9386024, y: -14.598293, z: 11.086639}
+    m_Value: {x: -18.129759, y: 1.9072078, z: -9.370148}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -875,11 +876,11 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: -0.5432081, y: 0.20104375, z: -0.13587797, w: -0.80378556}
     speed: 2
-    m_Value: {x: -0.5432081, y: 0.20104374, z: -0.13587797, w: -0.80378556}
+    m_Value: {x: -0.5432006, y: 0.20104097, z: -0.13587609, w: -0.8037745}
   m_Size:
-    m_Target: 36.85209
+    m_Target: 713.77875
     speed: 2
-    m_Value: 35.265156
+    m_Value: 713.24384
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -941,23 +942,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: fefaffff
+      m_SelectedIDs: eafaffff
+      m_LastClickedID: -1302
+      m_ExpandedIDs: f0fafffffcfafffffefaffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: Lever
+        m_OriginalName: Lever
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: 24992
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 8}
       m_SearchString: 
