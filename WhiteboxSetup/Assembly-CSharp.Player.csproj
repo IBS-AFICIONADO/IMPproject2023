@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\grenadeController.cs" />
     <Compile Include="Assets\Scripts\Swim.cs" />
     <Compile Include="Assets\Scripts\RobotManager.cs" />
+    <Compile Include="Assets\Scripts\Scene Management.cs" />
     <Compile Include="Assets\Scripts\EnemyStun.cs" />
     <Compile Include="Assets\Scripts\ItemPickUp_Dissapear.cs" />
     <Compile Include="Assets\Scripts\Lever.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Assets\Scripts\Powerups.cs" />
     <Compile Include="Assets\Scripts\patrol.cs" />
     <Compile Include="Assets\Scripts\playerMovement.cs" />
+    <Compile Include="Assets\SoundManagement.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

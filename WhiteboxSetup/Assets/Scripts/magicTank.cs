@@ -12,6 +12,7 @@ public class magicTank : MonoBehaviour
     [Range(0, 100)] public float magicMeter;
     public bool cooldown = false;
     public bool deplete = false;
+    public bool stun = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +22,11 @@ public class magicTank : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (magicMeter > 100 && magicMeter <= 1)
+        {
+            Debug.Log("it's outside the range");
+            magicMeter = 100;
+        }
         if (magicMeter <= 2)
         {
             StartCoroutine(cooldownTimer());

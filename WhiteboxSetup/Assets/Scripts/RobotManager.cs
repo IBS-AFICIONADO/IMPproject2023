@@ -102,6 +102,7 @@ public class RobotManager : MonoBehaviour
         viewMesh = new Mesh();
         viewMeshFilter.mesh = viewMesh;
         StartCoroutine(FOVRoutine());
+
     }
 
     private void OnTriggerEnter(Collider other)

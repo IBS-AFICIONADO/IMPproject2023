@@ -376,9 +376,11 @@
 "Assets/Scripts/Powerups.cs"
 "Assets/Scripts/RetryButton.cs"
 "Assets/Scripts/RobotManager.cs"
+"Assets/Scripts/Scene Management.cs"
 "Assets/Scripts/Swim.cs"
 "Assets/Scripts/UIController.cs"
 "Assets/Scripts/viewConeColor.cs"
+"Assets/SoundManagement.cs"
 -langversion:9.0
 
 /deterministic

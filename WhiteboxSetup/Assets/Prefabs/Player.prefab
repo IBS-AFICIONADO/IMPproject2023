@@ -48,6 +48,7 @@ MonoBehaviour:
   stunGrenade: {fileID: 5844798309994836386, guid: 74c3d6337bd6bfb40b9a111fcf8bedea, type: 3}
   throwForce: 10
   cam: {fileID: 0}
+  available: 1
   LineRenderer: {fileID: 5724280625202265860}
   releasePosition: {fileID: 307441939}
   LinePoints: 100
@@ -685,6 +686,7 @@ MonoBehaviour:
   groundDrag: 1
   groundingForce: 100
   Orientation: {fileID: 697388882903293121}
+  touch: 0
   Groundlayer:
     serializedVersion: 2
     m_Bits: 128
@@ -705,6 +707,7 @@ MonoBehaviour:
   magicMeter: 0
   cooldown: 0
   deplete: 0
+  stun: 0
 --- !u!54 &2568989549200963807
 Rigidbody:
   m_ObjectHideFlags: 0

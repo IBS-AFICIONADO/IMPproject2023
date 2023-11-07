@@ -295,29 +295,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visionRadius: 10.3
   fovAngle: 91
-  alertSpeed: 2
-  forgetSpeed: 2
-  visioncone: 1
-  alertStage: 0
-  alertLevel: 0
+  hearingRadius: 6.85
   targetMask:
     serializedVersion: 2
     m_Bits: 64
   obstructionMask:
     serializedVersion: 2
     m_Bits: 128
+  alertSpeed: 2
+  forgetSpeed: 2
+  alertStage: 0
+  alertLevel: 0
   meshResolution: 1
   viewMeshFilter: {fileID: 3986672734843683191}
   edgeDetectIte: 1
   edgeDistThreshold: 0.5
+  visioncone: 1
   playerInFOV: 0
   maxAlertEdit: 100
   targetRef: {fileID: 0}
-  hearingRadius: 6.85
   stunTime: 2
-  waypoints:
-  - {fileID: 0}
-  - {fileID: 0}
+  routinePoints: []
+  patrolPoints: []
+  searching: 0
+  alertVel: 0
+  intrigueVel: 0
+  patrolVel: 0
+  playerWasLost: 0
+  agent: {fileID: 0}
+  RobotSoundEffects: {fileID: 0}
+  RobotShutting: {fileID: 0}
 --- !u!136 &4598104915098079714
 CapsuleCollider:
   m_ObjectHideFlags: 0

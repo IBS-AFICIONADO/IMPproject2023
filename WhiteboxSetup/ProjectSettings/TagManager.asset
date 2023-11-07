@@ -10,6 +10,7 @@ TagManager:
   - Robot
   - Object
   - Die
+  - Audio
   layers:
   - Default
   - TransparentFX
