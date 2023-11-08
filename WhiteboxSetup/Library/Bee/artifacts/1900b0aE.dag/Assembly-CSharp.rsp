@@ -368,9 +368,14 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.11f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.11f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/GameOverScreen.cs"
+<<<<<<< Updated upstream
 "Assets/robotWalkSpeed.cs"
+=======
+"Assets/PlaySound.cs"
+>>>>>>> Stashed changes
 "Assets/Scripts/EnemyStun.cs"
 "Assets/Scripts/grenadeController.cs"
+"Assets/Scripts/IEnummerator.cs"
 "Assets/Scripts/ItemPickUp.cs"
 "Assets/Scripts/ItemPickUp_Dissapear.cs"
 "Assets/Scripts/laserSpawn.cs"
@@ -380,9 +385,11 @@
 "Assets/Scripts/playerCam.cs"
 "Assets/Scripts/playerController.cs"
 "Assets/Scripts/playerMovement.cs"
+"Assets/Scripts/PlayerSounds.cs"
 "Assets/Scripts/Powerups.cs"
 "Assets/Scripts/RetryGame.cs"
 "Assets/Scripts/RobotManager.cs"
+"Assets/Scripts/SceneManagement.cs"
 "Assets/Scripts/UIController.cs"
 "Assets/viewConeColor.cs"
 -langversion:9.0

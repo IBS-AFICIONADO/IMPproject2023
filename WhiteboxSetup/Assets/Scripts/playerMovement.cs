@@ -9,6 +9,9 @@ public class playerMovement : MonoBehaviour
     public float groundDrag;
     public float groundingForce;
     public Transform Orientation;
+    public bool touch = false;
+
+    public AudioSource walksound;
 
     [Header(" Layer of ground objects")]
     public LayerMask Groundlayer;
@@ -24,6 +27,9 @@ public class playerMovement : MonoBehaviour
     private float playerHeight;
     private  bool grounded;
     private bool playerInput;
+
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +52,7 @@ public class playerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        
         move();
     }
 
@@ -56,6 +63,7 @@ public class playerMovement : MonoBehaviour
         playerInput = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A)|| Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
+        walksound.Play();
     }
 
     private void move()
@@ -63,6 +71,7 @@ public class playerMovement : MonoBehaviour
         //direction with respect to camera 
         moveDirection = Orientation.forward * verticalInput + Orientation.right * horizontalInput;
         playerRB.AddForce(moveDirection.normalized * speed * 10f, ForceMode.Force);
+        
     }
 
     private void physics()
@@ -95,5 +104,15 @@ public class playerMovement : MonoBehaviour
             }
         }
 
+    }
+    public void OnCollisionEnter(Collision collisionInfo)
+    {
+
+        if (collisionInfo.collider.CompareTag("Robot"))
+        {
+            touch = true;
+            Debug.Log("Die");
+
+        }
     }
 }

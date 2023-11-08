@@ -13,6 +13,9 @@ public class magicTank : MonoBehaviour
     public bool cooldown = false;
     public bool deplete = false;
     // Start is called before the first frame update
+
+    public AudioSource charge;
+
     void Start()
     {
         magicMeter = 100;
@@ -23,6 +26,7 @@ public class magicTank : MonoBehaviour
     {
         if (magicMeter <= 2)
         {
+            charge.Play();
             StartCoroutine(cooldownTimer());
         }
         if (deplete)
@@ -33,12 +37,12 @@ public class magicTank : MonoBehaviour
         {
             magicMeter += magicCharge * Time.deltaTime;
         }
-    
-        
+
+
 
     }
-    
-   
+
+
     private IEnumerator cooldownTimer()
     {
         WaitForSeconds cooldownTime = new WaitForSeconds(3f);
@@ -48,5 +52,7 @@ public class magicTank : MonoBehaviour
         yield return cooldownTime;
         cooldown = false;
         yield break;
+
+     
     }
 }

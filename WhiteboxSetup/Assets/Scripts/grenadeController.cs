@@ -39,7 +39,7 @@ public class grenadeController : MonoBehaviour
     }
     private IEnumerator explode()
     {
-        WaitForSeconds wait = new WaitForSeconds(1f);
+        WaitForSeconds wait = new WaitForSeconds(0.4f);
         while (radius > effectAreaPrefab.transform.localScale.x)
         {
             effectAreaPrefab.transform.localScale += Vector3.one * Time.deltaTime * expandFactor;

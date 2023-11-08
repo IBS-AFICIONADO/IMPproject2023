@@ -517,5 +517,5 @@ MonoBehaviour:
   parent: {fileID: 8389109579211593826}
   effectArea: {fileID: 5761885077421145656, guid: 8987c0abc6a63484aa77562a45bd14f2, type: 3}
   radius: 20
-  expandFactor: 1000
+  expandFactor: 500
   player: {fileID: 1326085209165253175, guid: e34dcc98d9bcac24285f223c55d1fb4a, type: 3}

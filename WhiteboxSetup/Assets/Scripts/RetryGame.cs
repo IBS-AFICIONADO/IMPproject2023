@@ -5,8 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class RetryGame : MonoBehaviour
 {
- public void LoadGame()
+    public AudioSource defeated;
+    public void LoadGame()
     {
         SceneManager.LoadScene("Terrain Trial");
+    }
+    private void Start()
+    {
+        defeated.Play();
     }
 }
