@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\RobotManager.cs" />
     <Compile Include="Assets\Scripts\playerController.cs" />
     <Compile Include="Assets\Scripts\EnemyStun.cs" />
+    <Compile Include="Assets\robotWalkSpeed.cs" />
     <Compile Include="Assets\Scripts\ItemPickUp_Dissapear.cs" />
     <Compile Include="Assets\Scripts\laserSpawn.cs" />
     <Compile Include="Assets\Scripts\PickUp.cs" />

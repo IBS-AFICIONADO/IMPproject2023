@@ -19,8 +19,10 @@ public class RobotManager : MonoBehaviour
     //parameters vision
     public float visionRadius;
     [Range(0, 360)] public float fovAngle;
+
     //hearing + powerup stuff
     public float hearingRadius;
+
     //parameters before enum change
     const float maxAlert = 100f;
     [SerializeField]
@@ -71,12 +73,16 @@ public class RobotManager : MonoBehaviour
     [HideInInspector]
     public bool searching = false;
     private int m_CurrentWaypointIndex;
+
     [SerializeField]
     private float alertVel;
+
     [SerializeField]
     private float intrigueVel;
+
     [SerializeField]
     private float patrolVel;
+
     [HideInInspector]
     public bool playerWasLost;
     private int waypointIndex;
@@ -84,11 +90,10 @@ public class RobotManager : MonoBehaviour
     public NavMeshAgent agent;
     private Vector3 player;
 
-    private void Start()
-    {
-        if(routinePoints.Length>0)
-        agent.SetDestination(routinePoints[0].position);
-    }
+
+    //animation
+    private CharacterController CharacterController;
+    private Animator animator;
 
     private void Awake()
     {
@@ -100,7 +105,13 @@ public class RobotManager : MonoBehaviour
 
         viewMesh = new Mesh();
         viewMeshFilter.mesh = viewMesh;
-        StartCoroutine(FOVRoutine());
+        StartCoroutine(robotRoutine());
+
+        if (routinePoints.Length > 0)
+            agent.SetDestination(routinePoints[0].position);
+
+        animator = GetComponent<Animator>();
+        CharacterController = GetComponent<CharacterController>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -111,27 +122,27 @@ public class RobotManager : MonoBehaviour
             }
         }
 
-    private void Update()
-    {
-        Debug.Log(playerInFOV);
-    }
 
     private void LateUpdate()
     {
-
-      //here for playtesting remove later
-        if (visioncone)
-        {
-            drawFOV();
-        }
-        else
-        {
-            viewMesh.Clear();
-        }
+        //needs to be as late update because______ dont move :)
+        drawFOV();
 
     }
 
-    private IEnumerator FOVRoutine()
+    private void animationBools()
+    {
+        if(agent.velocity != Vector3.zero)
+        {
+            animator.SetBool("isMoving", true);
+        }
+        else
+        {
+            animator.SetBool("isMoving", false);
+        }
+    }
+
+    private IEnumerator robotRoutine()
     {
         WaitForSeconds wait = new WaitForSeconds(0.1f);
 
@@ -140,7 +151,8 @@ public class RobotManager : MonoBehaviour
             yield return wait;
             FOVCheck();
             UpdateAlertstate(playerInFOV);
-            chasePlayer();
+            moveToWaypoints();
+            animationBools();
         }
     }
 
@@ -176,7 +188,6 @@ public class RobotManager : MonoBehaviour
             yield return stunCooldown;
         }
    
-
     private void FOVCheck()
     {
         //check if there are any other colliders in a sphere with view radius on the targetlayer specific layer prevents from scanning all layers every iteration
@@ -211,8 +222,6 @@ public class RobotManager : MonoBehaviour
         else if (playerInFOV)
             playerInFOV = false;
     }
-
-  
 
     public void UpdateAlertstate(bool playerinFOV)
     {
@@ -276,7 +285,7 @@ public class RobotManager : MonoBehaviour
         }
     }
     
-    private void chasePlayer()
+    private void moveToWaypoints()
     {
         if (!isStunned)
         {
@@ -350,7 +359,7 @@ public class RobotManager : MonoBehaviour
         }
     }
    
-    void drawFOV()
+    private void drawFOV()
     {
         //amount of rays cast is the angle* resolution
         int stepCount = Mathf.RoundToInt(fovAngle * meshResolution);
