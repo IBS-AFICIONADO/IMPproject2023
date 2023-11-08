@@ -11,8 +11,7 @@ public class playerMovement : MonoBehaviour
     public Transform Orientation;
     public bool touch = false;
 
-    public AudioSource walksound;
-
+  
     [Header(" Layer of ground objects")]
     public LayerMask Groundlayer;
 
@@ -63,7 +62,7 @@ public class playerMovement : MonoBehaviour
         playerInput = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A)|| Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
-        walksound.Play();
+        
     }
 
     private void move()
@@ -72,6 +71,7 @@ public class playerMovement : MonoBehaviour
         moveDirection = Orientation.forward * verticalInput + Orientation.right * horizontalInput;
         playerRB.AddForce(moveDirection.normalized * speed * 10f, ForceMode.Force);
         
+
     }
 
     private void physics()

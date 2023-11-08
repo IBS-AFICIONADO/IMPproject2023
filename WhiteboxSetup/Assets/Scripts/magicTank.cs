@@ -14,7 +14,7 @@ public class magicTank : MonoBehaviour
     public bool deplete = false;
     // Start is called before the first frame update
 
-    public AudioSource charge;
+  
 
     void Start()
     {
@@ -26,7 +26,7 @@ public class magicTank : MonoBehaviour
     {
         if (magicMeter <= 2)
         {
-            charge.Play();
+
             StartCoroutine(cooldownTimer());
         }
         if (deplete)
