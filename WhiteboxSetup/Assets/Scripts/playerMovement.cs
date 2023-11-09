@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class playerMovement : MonoBehaviour
@@ -27,15 +28,18 @@ public class playerMovement : MonoBehaviour
     private  bool grounded;
     private bool playerInput;
 
+    public AudioSource walksound;
 
-
-
+    private Animator animator;
+    private AnimatorController animatorController;
     // Start is called before the first frame update
     void Start()
     {
         playerRB = GetComponent<Rigidbody>();
         playerRB.freezeRotation = true;
         playerHeight = GetComponent<CapsuleCollider>().height;
+        animator = GetComponent<Animator>();
+        animatorController = GetComponent<AnimatorController>();    
    
         
     }
@@ -43,7 +47,9 @@ public class playerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.1f, Groundlayer);
+        grounded = Physics.Raycast(GetComponent<CapsuleCollider>().transform.position, Vector3.down, playerHeight / 2 +0.1f, Groundlayer);
+        Debug.DrawRay(GetComponent<CapsuleCollider>().transform.position, Vector3.down,Color.cyan);
+        Debug.Log(grounded);
         physics();
         input();
 
@@ -62,6 +68,14 @@ public class playerMovement : MonoBehaviour
         playerInput = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A)|| Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
+      
+           animator.SetBool("isMoving", playerInput);
+          
+         if (!walksound.isPlaying && playerInput)
+        {
+            walksound.Play();
+        }
+
         
     }
 
@@ -76,12 +90,11 @@ public class playerMovement : MonoBehaviour
 
     private void physics()
     {
-        if (grounded)
+       
             playerRB.drag = groundDrag;
-        else
-            playerRB.drag = 0;
+        
 
-        if (!playerInput && grounded)
+        if (!playerInput)
             playerRB.drag = groundDrag * 10;
 
         Vector3 xzVelocity = new Vector3(playerRB.velocity.x, 0f, playerRB.velocity.z);

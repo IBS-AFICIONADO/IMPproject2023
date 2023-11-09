@@ -95,6 +95,7 @@ public class RobotManager : MonoBehaviour
     private CharacterController CharacterController;
     private Animator animator;
 
+
     private void Awake()
     {
         alertStage = AlertStage.Peaceful;
@@ -112,6 +113,7 @@ public class RobotManager : MonoBehaviour
 
         animator = GetComponent<Animator>();
         CharacterController = GetComponent<CharacterController>();
+     
     }
 
     private void OnTriggerEnter(Collider other)
@@ -127,7 +129,7 @@ public class RobotManager : MonoBehaviour
     {
         //needs to be as late update because______ dont move :)
         drawFOV();
-
+        Debug.Log(playerInFOV);
     }
 
     private void animationBools()
@@ -140,6 +142,10 @@ public class RobotManager : MonoBehaviour
         {
             animator.SetBool("isMoving", false);
         }
+
+        
+            animator.SetBool("isStunned",isStunned);
+        
     }
 
     private IEnumerator robotRoutine()
@@ -198,7 +204,6 @@ public class RobotManager : MonoBehaviour
             {
                 if (c.CompareTag("Player"))
                 {
-
                     //calculate direction between enemy and player
                     Vector3 directionToTarget = (c.transform.position - transform.position).normalized;
 
@@ -319,7 +324,6 @@ public class RobotManager : MonoBehaviour
                 case AlertStage.Peaceful:
                     if (!searching)
                     {
-                        Debug.Log("weiner");
                         agent.speed = patrolVel;
                         regularPatrol();
                     }
